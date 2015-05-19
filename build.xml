@@ -16,9 +16,9 @@
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
         <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false">
-            <!--classpath>
-                <pathelement path="${lib.dir}/jcurses/jcurses.jar"/>
-            </classpath-->
+            <classpath>
+                <pathelement path="${lib.dir}/lanterna-2.1.7.jar"/>
+            </classpath>
         </javac>
     </target>
 
@@ -29,7 +29,7 @@
                 <!--attribute name="Class-Path" value="lib/jcurses.jar"/-->
                 <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
-            <!--zipgroupfileset dir="${lib.dir}"/-->
+            <zipgroupfileset dir="${lib.dir}"/>
         </jar>
     </target>
 
