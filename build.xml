@@ -3,26 +3,22 @@
     <property name="src.dir"     value="src"/>
     <property name="bin.dir"     value="bin"/>
     <property name="lib.dir"     value="lib"/>
-    <property name="dist.dir"    value="dist"/>
-    <property name="win64.dir"   value="${dist.dir}/win64"/>
-    <property name="win32.dir"   value="${dist.dir}/win32"/>
     <property name="jar.dir"     value="${bin.dir}/jar"/>
     <property name="classes.dir" value="${bin.dir}/classes"/>
     <property name="main-class"  value="${ant.project.name}.Main"/>
 
-    <target name="main" depends="clean,jar,dist-win64,run-win64"/>
+    <target name="main" depends="clean,jar,run"/>
 
     <target name="clean">
         <delete dir="${bin.dir}" quiet="true"/>
-        <delete dir="${dist.dir}" quiet="true"/>
     </target>
 
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
         <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false">
-            <classpath>
+            <!--classpath>
                 <pathelement path="${lib.dir}/jcurses/jcurses.jar"/>
-            </classpath>
+            </classpath-->
         </javac>
     </target>
 
@@ -30,40 +26,15 @@
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
             <manifest>
-                <attribute name="Class-Path" value="lib/jcurses.jar"/>
+                <!--attribute name="Class-Path" value="lib/jcurses.jar"/-->
                 <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
             <!--zipgroupfileset dir="${lib.dir}"/-->
         </jar>
     </target>
 
-    <target name="dist-win64">
-        <mkdir dir="${win64.dir}/lib"/>
-        <copy todir="${win64.dir}">
-            <fileset file="${jar.dir}/${ant.project.name}.jar"/>
-        </copy>
-        <copy todir="${win64.dir}/lib">
-            <fileset file="${lib.dir}/jcurses/libjcurses64.dll"/>
-            <fileset file="${lib.dir}/jcurses/jcurses.jar"/>
-        </copy>
+    <target name="run">
+        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
     </target>
 
-    <target name="dist-win32">
-        <mkdir dir="${win32.dir}/lib"/>
-        <copy todir="${win32.dir}">
-            <fileset file="${jar.dir}/${ant.project.name}.jar"/>
-        </copy>
-        <copy todir="${win32.dir}/lib">
-            <fileset file="${lib.dir}/jcurses/libjcurses.dll"/>
-            <fileset file="${lib.dir}/jcurses/jcurses.jar"/>
-        </copy>
-    </target>
-
-    <target name="run-win64">
-        <java jar="${win64.dir}/${ant.project.name}.jar" fork="true"/>
-    </target>
-
-    <target name="run-win32">
-        <java jar="${win32.dir}/${ant.project.name}.jar" fork="true"/>
-    </target>
 </project>
