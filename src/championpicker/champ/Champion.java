@@ -20,4 +20,8 @@ public class Champion {
     public String getName() {
         return name;
     }
+
+    public String toString() {
+        return name;
+    }
 }

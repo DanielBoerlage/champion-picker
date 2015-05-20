@@ -7,6 +7,8 @@ import java.io.File;
 import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.TerminalFacade;
 
+import java.util.Arrays;
+
 class Main{
 
 	/*public static void main(String[] args) throws Exception {
@@ -29,7 +31,14 @@ class Main{
 		//System.out.println("sandwich?");
 		ChampionList champList = new ChampionList();
 		champList.add(new Champion("Aatrox"));
+		champList.add(new Champion("Ahri"));
 		File file = new File("./championData.txt");
 		ChampionIO.writeChampionListToFile(champList, file);
+		System.out.println(ChampionIO.readChampionListFromFile(file));
 	}
+
+	/*public static void main(String[] args) throws Exception {
+		String str = "ssadssassadfs";
+		System.out.println(Arrays.toString(str.split("(a)(?=[^s])")));
+	}*/
 }
