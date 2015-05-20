@@ -1,0 +1,5 @@
+Aatrox
+	.PickRate: 0.5 +c 0
+Ahri
+	.PickRate: 0.6 +c 2
+	.GoodAiganst: {ahri=0.2 +c 1, aatrox=0.8 +c 2}

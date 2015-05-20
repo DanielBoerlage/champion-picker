@@ -12,14 +12,6 @@ public class Champion {
 
     private List<ChampionParam> params;
 
-    double pickRate;
-    double banRate;
-
-    //UncertainValue pickRate;
-    //UncertainValue banRate;
-    Map<Champion, UncertainValue> goodWith;
-    Map<Champion, UncertainValue> goodAiganst;
-
     public Champion(String name) {
         this.name = name;
         params = new ArrayList<ChampionParam>();
@@ -33,10 +25,18 @@ public class Champion {
         return name;
     }
 
-    public String toString() {
+    public String getSummary() {
         String out = name;
         for(ChampionParam param : params)
             out += "\n\t." + param.key() + ": " + param.value();
         return out;
+    }
+
+    public boolean equals(Object obj) {
+        return ((Champion)obj).getName().equals(name);
+    }
+
+    public String toString() {
+        return getName();
     }
 }

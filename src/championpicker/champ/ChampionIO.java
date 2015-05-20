@@ -3,6 +3,8 @@ package championpicker.champ;
 import championpicker.console.Output;
 
 import championpicker.uncertainty.UncertainValue;
+import championpicker.uncertainty.UncertainParam;
+import championpicker.uncertainty.UncertainMap;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -32,7 +34,10 @@ public class ChampionIO {
         String[] lines = champInfo.split("\n");
         Champion out = new Champion(lines[0]);
         for(int i = 1; i < lines.length; i++) { // CAUTION redneck coding ahead
-            out.addParam(UncertainValue.parseUncertainValue(lines[i].substring(lines[i].indexOf(".") + 1)));
+            if(lines[i].contains("{"))
+                out.addParam(UncertainMap.parseUncertainMap(lines[i]));
+            else
+                out.addParam(UncertainParam.parseUncertainParam(lines[i]));
         }
         return out;
     }
@@ -41,7 +46,7 @@ public class ChampionIO {
     public static void writeChampionListToFile(ChampionList champList, File file) {
         try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(file)))) {
             for (Champion champ : champList)
-                writer.println(champ);
+                writer.println(champ.getSummary());
         } catch (IOException e) {
             Output.err("IO Error writing to file " + file);
         }
