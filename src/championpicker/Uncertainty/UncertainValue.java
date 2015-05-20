@@ -1,3 +1,5 @@
+package championpicker.Uncertainty;
+
 public class UncertainValue {
 
     private double value, uncertainty;

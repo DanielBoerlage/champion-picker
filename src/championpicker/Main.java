@@ -1,11 +1,11 @@
 package championpicker;
 
-import java.nio.charset.Charset;
+import championpicker.champ.*;
+
+import java.io.File;
 
 import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.TerminalFacade;
-import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.text.UnixTerminal;
 
 class Main{
 
@@ -26,6 +26,10 @@ class Main{
 	}*/
 
 	public static void main(String[] args) throws Exception {
-		
+		//System.out.println("sandwich?");
+		ChampionList champList = new ChampionList();
+		champList.add(new Champion("Aatrox"));
+		File file = new File("./championData.txt");
+		ChampionIO.writeChampionListToFile(champList, file);
 	}
 }
