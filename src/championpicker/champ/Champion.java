@@ -10,6 +10,9 @@ public class Champion {
 
     double pickRate;
     double banRate;
+
+    //UncertainValue pickRate;
+    //UncertainValue banRate;
     Map<Champion, UncertainValue> goodWith;
     Map<Champion, UncertainValue> goodAiganst;
 
@@ -22,6 +25,7 @@ public class Champion {
     }
 
     public String toString() {
-        return name;
+        String out = name;
+        return out;
     }
 }

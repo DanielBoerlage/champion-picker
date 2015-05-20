@@ -28,7 +28,6 @@ class Main{
 	}*/
 
 	public static void main(String[] args) throws Exception {
-		//System.out.println("sandwich?");
 		ChampionList champList = new ChampionList();
 		champList.add(new Champion("Aatrox"));
 		champList.add(new Champion("Ahri"));
