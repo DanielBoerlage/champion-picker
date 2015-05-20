@@ -1,2 +1,4 @@
 Aatrox
+	.pickRate: 0.5 +confidence 0
 Ahri
+	.pickRate: 0.6 +confidence 2

@@ -2,6 +2,8 @@ package championpicker.champ;
 
 import championpicker.console.Output;
 
+import championpicker.uncertainty.UncertainValue;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
@@ -26,9 +28,12 @@ public class ChampionIO {
     }
 
     public static Champion parseChampionInfo(String champInfo) {
-        System.out.println("'" + champInfo + "'");
+        //System.out.println("'" + champInfo + "'");
         String[] lines = champInfo.split("\n");
         Champion out = new Champion(lines[0]);
+        for(int i = 1; i < lines.length; i++) { // CAUTION redneck coding ahead
+            out.addParam(UncertainValue.parseUncertainValue(lines[i].substring(lines[i].indexOf(".") + 1)));
+        }
         return out;
     }
 

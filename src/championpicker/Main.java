@@ -1,6 +1,7 @@
 package championpicker;
 
 import championpicker.champ.*;
+import championpicker.uncertainty.*;
 
 import java.io.File;
 
@@ -29,11 +30,16 @@ class Main{
 
 	public static void main(String[] args) throws Exception {
 		ChampionList champList = new ChampionList();
-		champList.add(new Champion("Aatrox"));
-		champList.add(new Champion("Ahri"));
+		Champion aatrox = new Champion("Aatrox");
+		aatrox.addParam(new UncertainValue("pickRate", .5, 0));
+		Champion ahri = new Champion("Ahri");
+		ahri.addParam(new UncertainValue("pickRate", .6, 2));
+		champList.add(aatrox);
+		champList.add(ahri);
 		File file = new File("./championData.txt");
 		ChampionIO.writeChampionListToFile(champList, file);
 		System.out.println(ChampionIO.readChampionListFromFile(file));
+		ChampionList newList = ChampionIO.readChampionListFromFile(file);
 	}
 
 	/*public static void main(String[] args) throws Exception {
