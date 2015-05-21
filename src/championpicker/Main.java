@@ -2,6 +2,7 @@ package championpicker;
 
 import championpicker.champ.*;
 import championpicker.uncertainty.*;
+import championpicker.console.Output;
 
 import java.io.File;
 
@@ -13,6 +14,9 @@ import java.util.HashMap;
 
 class Main{
 
+	public static void main(String[] args){
+		Output.testTerminal();
+	}
 	/*public static void main(String[] args) throws Exception {
 		GUIScreen textGUI = TerminalFacade.createGUIScreen();
 	    if(textGUI == null) {
@@ -29,7 +33,7 @@ class Main{
 	    textGUI.getScreen().stopScreen();
 	}*/
 
-	public static void main(String[] args) throws Exception {
+	/*public static void main(String[] args) throws Exception {
 		ChampionList champList = new ChampionList();
 		Champion aatrox = new Champion("Aatrox");
 		aatrox.addParam(new UncertainParam("PickRate", .5, 0));
@@ -47,7 +51,7 @@ class Main{
 		ChampionList newList = ChampionIO.readChampionListFromFile(file);
 		System.out.println(newList.get(0).getSummary());
 		System.out.println(newList.get(1).getSummary());
-	}
+	}*/
 
 	/*public static void main(String[] args) throws Exception {
 		String str = "ssadssassadfs";
