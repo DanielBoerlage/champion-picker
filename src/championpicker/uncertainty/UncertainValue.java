@@ -13,8 +13,8 @@ public class UncertainValue {
     }
 
     public static UncertainValue parseUncertainValue(String str) {
-        double value = Double.parseDouble(str.substring(0, str.indexOf("+") - 1));
-        int confidence = Integer.parseInt(str.substring(str.indexOf("+c") + 3));
+        double value = Double.parseDouble(str.substring(0, str.indexOf("+") - 1).trim());
+        int confidence = Integer.parseInt(str.substring(str.indexOf("+c") + 3).trim());
         return new UncertainValue(value, confidence);
     }
 
