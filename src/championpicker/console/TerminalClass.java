@@ -18,7 +18,7 @@ public class TerminalClass{
 
 		GUIScreen testGUI = new GUIScreen(new Screen(term));
 
-		//term.enterPrivateMode();
+		term.enterPrivateMode();
 
 		DialogWindow helloWorld = new DialogWindow(testGUI);
 
@@ -31,7 +31,7 @@ public class TerminalClass{
 
 		helloWorld.stop();
 
-		//term.exitPrivateMode();
+		term.exitPrivateMode();
 	}
 
 

@@ -1,6 +1,7 @@
 package championpicker.champ;
 
-public interface ChampionParam {
-    public Object key();
-    public Object value();
+import championpicker.io.JSONable;
+
+public interface ChampionParam extends JSONable {
+    public String getName();
 }

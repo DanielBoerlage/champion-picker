@@ -3,8 +3,12 @@ package championpicker;
 import championpicker.champ.*;
 import championpicker.uncertainty.*;
 import championpicker.console.*;
+import championpicker.io.*;
 
 import java.io.File;
+import java.nio.file.*;
+
+import org.json.*;
 
 import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.TerminalFacade;
@@ -16,9 +20,32 @@ public class Main{
 
 	public static final String NAME = "Champion Picker";
 
-	public static void main(String[] args){
-		TerminalClass.createTerm();
+	public static void main(String[] args) {
+		
+		// String json = "{\"pageInfo\": {\"pageName": "abc\",\"pagePic\": \"http://example.com/content.jpg\"}\"posts\":[{\"post_id\": \"123456789012_123456789012\",\"actor_id\": \"1234567890\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg\",\"nameOfPersonWhoPosted\": \"Jane Doe\",\"message\": \"Sounds cool. Can't wait to see it!\",\"likesCount\": \"2\",\"comments\": [],\"timeOfPost\": \"1234567890\"}]}";
+
+		// JSONObject obj = new JSONObject(json);
+		// System.out.println(obj.getJSONObject("pageInfo").getString("pageName"));
+
+		// JSONArray arr = obj.getJSONArray("posts");
+		// for (int i = 0; i < arr.length(); i++)
+		// {
+		//     System.out.println(post_id = arr.getJSONObject(i).getString("post_id"));
+		// }
+
+		//System.out.println(new JSONObject("{\"hi\":\"bye\"}").getString("hi"));
+
+		Path path = Paths.get("a_file.txt");
+		String content = "hello worlf!";
+		IO.writeToFile(content, path);
+
+		System.out.println(IO.readFromFile(path));
 	}
+
+	/*public static void main(String[] args){
+		TerminalClass.createTerm();
+	}*/
+	
 	/*public static void main(String[] args) throws Exception {
 		GUIScreen textGUI = TerminalFacade.createGUIScreen();
 	    if(textGUI == null) {
