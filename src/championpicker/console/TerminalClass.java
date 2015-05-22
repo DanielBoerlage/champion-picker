@@ -39,12 +39,9 @@ public class TerminalClass{
 			Thread.sleep(10000);
 		} catch(Exception e) { }
 
-<<<<<<< HEAD
-=======
-		helloWorld.stop();
+		//helloWorld.stop();
 
->>>>>>> 9e944ee08e1bfd9d18847f33ef26837172942585
-		term.exitPrivateMode();
+		//term.exitPrivateMode();
 	}
 
 

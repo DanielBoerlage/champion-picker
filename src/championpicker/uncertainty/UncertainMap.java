@@ -1,12 +1,12 @@
 package championpicker.uncertainty;
 
 import java.util.HashMap;
-import championpicker.champ.Champion;
-import championpicker.champ.ChampionParam;
+import championpicker.champ.Champ;
+import championpicker.champ.ChampStat;
 
 import org.json.JSONObject;
 
-public class UncertainMap extends HashMap<String, UncertainValue> implements ChampionParam {
+public class UncertainMap extends HashMap<String, UncertainValue> implements ChampStat {
 
     private String name;
 

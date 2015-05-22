@@ -10,8 +10,6 @@ public class IO {
 
 	public static String readFromFile(Path path) {
 		try {
-            //byte[] encoded = Files.readAllBytes(path);
-            //return new String(encoded, Charset.defaultCharset());
             return new String(Files.readAllBytes(path));
         } catch (IOException e) {
             Output.err("IO Error reading from file " + path);

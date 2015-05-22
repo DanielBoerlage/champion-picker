@@ -1,4 +1,4 @@
-package championpicker.champ;
+/*package championpicker.champ;
 
 import championpicker.console.Output;
 
@@ -63,3 +63,4 @@ public class ChampionIO {
         return "";
     }
 }
+*/

@@ -9,20 +9,27 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Champion implements JSONable {
+public class Champ implements JSONable {
 
     private String name;
 
-    private List<ChampionParam> params;
+    //private List<ChampionStat> stats;
 
-    public Champion(String name) {
+    //private Map<String, ChampionStat> stats;
+
+    public Champ(String name) {
         this.name = name;
-        params = new ArrayList<ChampionParam>();
+        //stats = new ArrayList<ChampionStat>();
     }
 
-    public void addParam(ChampionParam param) {
-        params.add(param);
-    }
+    //public Champion(String name) {
+        //this.name = name;
+        //stat = new HashMap<String, ChampionStat
+    //}
+
+    //public void addStat(ChampionStat stat) {
+    //    stats.add(stat);
+    //}
 
     public String getName() {
         return name;

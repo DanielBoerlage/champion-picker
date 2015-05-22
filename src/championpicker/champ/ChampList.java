@@ -1,10 +1,13 @@
 package championpicker.champ;
 
+import championpicker.io.JSONable;
 import java.util.ArrayList;
 
-public class ChampionList extends ArrayList<Champion> {
+import org.json.JSONObject;
 
-    public ChampionList() {
+public class ChampList extends ArrayList<Champ> implements JSONable {
+
+    public ChampList() {
         super();
     }
 
@@ -14,4 +17,8 @@ public class ChampionList extends ArrayList<Champion> {
     //             return champion;
     //     return null;
     // }
+    
+    public JSONObject toJSON() {
+        return null;
+    }
 }
