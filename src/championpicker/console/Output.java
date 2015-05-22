@@ -8,11 +8,7 @@ import com.googlecode.lanterna.terminal.TerminalSize;
 
 public class Output {
 
-	public static void creatTerm(){
-		Terminal terminal = TerminalFacade.createTerminal();
-		TerminalSize screenSize = terminal.getTerminalSize();
-	}
-	
+	//TerminalClass.createTerm();
 	
 		
 	public static void err(String errmsg) {

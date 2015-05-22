@@ -2,7 +2,7 @@ package championpicker;
 
 import championpicker.champ.*;
 import championpicker.uncertainty.*;
-import championpicker.console.Output;
+import championpicker.console.*;
 
 import java.io.File;
 
@@ -12,10 +12,12 @@ import com.googlecode.lanterna.TerminalFacade;
 import java.util.Arrays;
 import java.util.HashMap;
 
-class Main{
+public class Main{
+
+	public static final String NAME = "Champion Picker";
 
 	public static void main(String[] args){
-		Output.testTerminal();
+		TerminalClass.createTerm();
 	}
 	/*public static void main(String[] args) throws Exception {
 		GUIScreen textGUI = TerminalFacade.createGUIScreen();
