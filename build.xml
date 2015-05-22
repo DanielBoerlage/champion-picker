@@ -18,6 +18,7 @@
         <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false">
             <classpath>
                 <pathelement path="${lib.dir}/lanterna-2.1.7.jar"/>
+                <pathelement path="${lib.dir}/json-20141113.jar"/>
             </classpath>
         </javac>
     </target>

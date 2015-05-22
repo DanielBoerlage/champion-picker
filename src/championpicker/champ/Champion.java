@@ -1,12 +1,15 @@
 package championpicker.champ;
 
 import championpicker.uncertainty.UncertainValue;
+import championpicker.io.JSONable;
+
+import org.json.JSONObject;
 
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Champion {
+public class Champion implements JSONable {
 
     private String name;
 
@@ -25,18 +28,30 @@ public class Champion {
         return name;
     }
 
-    public String getSummary() {
-        String out = name;
-        for(ChampionParam param : params)
-            out += "\n\t." + param.key() + ": " + param.value();
-        return out;
+    // public String getSummary() {
+    //     String out = name;
+    //     for(ChampionParam param : params)
+    //         out += "\n\t." + param.key() + ": " + param.value();
+    //     return out;
+    // }
+
+    // public boolean equals(Object obj) {
+    //     return ((Champion)obj).getName().equals(name);
+    // }
+
+    public JSONObject toJSON() {
+        return null;
     }
 
-    public boolean equals(Object obj) {
-        return ((Champion)obj).getName().equals(name);
+    public String getSummary() {
+        return null;
     }
 
     public String toString() {
-        return getName();
+        // String out = name;
+        // for(ChampionParam param : params)
+        //     out += "\n\t." + param.key() + ": " + param.value();
+        // return out;
+        return name;
     }
 }

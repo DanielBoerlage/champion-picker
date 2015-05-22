@@ -8,10 +8,10 @@ public class ChampionList extends ArrayList<Champion> {
         super();
     }
 
-    public Champion getChampion(String name) {
-        for(Champion champion : this)
-            if(champion.getName().equals(name))
-                return champion;
-        return null;
-    }
+    // public Champion getChampion(String name) {
+    //     for(Champion champion : this)
+    //         if(champion.getName().equals(name))
+    //             return champion;
+    //     return null;
+    // }
 }

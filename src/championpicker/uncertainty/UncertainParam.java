@@ -1,5 +1,7 @@
 package championpicker.uncertainty;
 
+import org.json.JSONObject;
+
 import championpicker.champ.ChampionParam;
 
 public class UncertainParam extends UncertainValue implements ChampionParam {
@@ -18,8 +20,12 @@ public class UncertainParam extends UncertainValue implements ChampionParam {
         return new UncertainParam(name, uv.getValue(), uv.getConfidence());
     }
 
-    public Object key() {
+    public String getName() {
         return name;
+    }
+
+    public JSONObject toJSON() {
+        return null;
     }
 
     public Object value() {
