@@ -1,4 +1,4 @@
-package championpicker.champ;
+/*package championpicker.champ;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -16,7 +16,10 @@ public class StatisticalChamp extends Champ {
 		stats.put(name, stat);
 	}
 
-	// public String toString() {
+	public String toString() {
 
-	// }
-}
+	}
+
+
+
+}*/

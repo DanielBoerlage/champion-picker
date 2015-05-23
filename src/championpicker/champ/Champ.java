@@ -6,20 +6,21 @@ import championpicker.io.JSONable;
 import org.json.JSONObject;
 
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Champ implements JSONable {
+public class Champ {// implements JSONable {
 
     private String name;
 
     //private List<ChampionStat> stats;
 
-    //private Map<String, ChampionStat> stats;
+    private Map<String, Object> stats;
 
     public Champ(String name) {
         this.name = name;
-        //stats = new ArrayList<ChampionStat>();
+        stats = new HashMap<String, Object>();
     }
 
     //public Champion(String name) {
@@ -30,6 +31,10 @@ public class Champ implements JSONable {
     //public void addStat(ChampionStat stat) {
     //    stats.add(stat);
     //}
+
+    public void addStat(String key, Object stat) {
+        stats.put(key, stat);
+    }
 
     public String getName() {
         return name;
@@ -46,8 +51,12 @@ public class Champ implements JSONable {
     //     return ((Champion)obj).getName().equals(name);
     // }
 
-    public JSONObject toJSON() {
-        return null;
+     public JSONObject getStats() {
+        JSONObject json = new JSONObject();
+        for(Map.Entry<String, Object> stat : stats.entrySet())
+            json.put(stat.getKey(), stat.getValue().toString());
+        return json;
+        //return new JSONObject(stats); <-- treats stat as a bean object
     }
 
     public String getSummary() {

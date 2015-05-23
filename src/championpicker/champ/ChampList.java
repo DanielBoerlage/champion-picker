@@ -28,12 +28,42 @@ public class ChampList extends ArrayList<Champ> {
     //    return null;
     //}
 
-    public JSONArray toJSONArray() {
+    /*public JSONArray toJSONArray() {
         JSONStringer json = new JSONStringer();
         json.array();
         for (Champ champ : this)
             json.value(champ);
         json.endArray();
         return new JSONArray(json.toString());
+    }*/
+
+    // public JSONObject toJSON() {
+    //     // JSONStringer json = new JSONStringer();
+    //     // json.object();
+    //     // for (Champ champ : this) {
+    //     //     json.key(champ.getName());
+    //     //     json.value(
+    //     // }
+    //     // json.endObject();
+
+    //     JSONObject json = new JSONObject();
+    //     for (Champ champ : this) {
+    //         json.put(champ.getName(), champ.getStats());
+    //     }
+    //     return json;
+    // }
+
+
+    public JSONObject champStatsJSON() {
+        JSONObject json = new JSONObject();
+        for (Champ champ : this) {
+            json.put(champ.getName(), champ.getStats());
+        }
+        return json;
     }
+
+    /*public JSONObject statsInJSON() {
+        JSONObject obj = new JSONObject();
+        for()
+    }*/
 }

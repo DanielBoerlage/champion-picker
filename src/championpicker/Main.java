@@ -55,9 +55,20 @@ public class Main{
 		// System.out.println(obj.toString(4));
 
 		ChampList champs = new ChampList();
-		StatisticalChamp aatrox = new StatisticalChamp("Aatrox");
+		Champ aatrox = new Champ("Aatrox");
+		Champ ahri = new Champ("Ahri");
+		champs.add(aatrox);
+		champs.add(ahri);
 		aatrox.addStat("PickRate", new UncertainValue(.5, 0));
-
+		aatrox.addStat("BanRate", new UncertainValue(.3, 6));
+		RelationalChampMap aatroxGA = new RelationalChampMap();
+		aatroxGA.put(aatrox, new UncertainValue(.5, 32));
+		aatroxGA.put(ahri, new UncertainValue(.7, 1));
+		aatrox.addStat("GoodWith", aatroxGA);
+		ahri.addStat("PickRate", new UncertainValue(.2, 10));
+		ahri.addStat("BanRate", new UncertainValue(0, 0));
+		JSONObject obj = champs.toJSON();
+		System.out.println(obj.toString(4));
 
 		// JSONStringer json = new JSONStringer();
 		// json	

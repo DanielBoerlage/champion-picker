@@ -1,7 +1,7 @@
-package championpicker.champ;
+// package championpicker.champ;
 
-import championpicker.io.JSONable;
+// import java.util.ArrayList;
 
-public interface ChampStat extends JSONable {
-    public String getName();
-}
+// public class ChampStats extends ArrayList<Champ> {
+    
+// }

@@ -1,18 +1,16 @@
 package championpicker.uncertainty;
 
+import java.util.Map;
 import java.util.HashMap;
 import championpicker.champ.Champ;
-import championpicker.champ.ChampStat;
+//import championpicker.champ.ChampStat;
 
 import org.json.JSONObject;
 
-public class UncertainMap extends HashMap<String, UncertainValue> implements ChampStat {
+public class RelationalChampMap extends HashMap<Champ, UncertainValue> {
 
-    private String name;
-
-    public UncertainMap(String name) {
+    public RelationalChampMap() {
         super();
-        this.name = name;
     }
 
     // public static UncertainMap parseUncertainMap(String str) {
@@ -30,27 +28,22 @@ public class UncertainMap extends HashMap<String, UncertainValue> implements Cha
     //     return um;
     // }
 
-    public static UncertainMap parseUncertainMap(String str) {
-        return null;
-    }
+    // public static UncertainMap parseUncertainMap(String str) {
+    //     return null;
+    // }
 
-    public String getName() {
-        return name;
-    }
+    // public String getName() {
+    //     return name;
+    // }
 
-    public JSONObject toJSON() {
-        return new JSONObject(this);
+    public String toString() {
+        JSONObject json = new JSONObject();
+        for(Map.Entry<Champ, UncertainValue> champ : entrySet())
+            json.put(champ.getKey().getName(), champ.getValue().toString());
+        return json.toString();
     }
 
     // public Object value() {
     //     return toString();
     // }
 }
-
-
-/*
-
-Aatrox
-    .goodAiganst: {Ahri=0.5 +confidence 0, Alistar=0.5 +confidence 3}
-
-    */

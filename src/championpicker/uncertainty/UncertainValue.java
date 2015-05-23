@@ -1,6 +1,6 @@
 package championpicker.uncertainty;
 
-import championpicker.champ.ChampStat;
+//import championpicker.champ.ChampStat;
 
 import static java.lang.Math.tanh;
 
