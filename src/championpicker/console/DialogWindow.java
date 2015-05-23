@@ -1,6 +1,7 @@
 package championpicker.console;
 
 import championpicker.Main;
+import com.googlecode.lanterna.gui.layout.LayoutParameter;
 
 import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.Interactable;
@@ -11,30 +12,71 @@ import com.googlecode.lanterna.gui.Interactable;
 import com.googlecode.lanterna.gui.Window;
 import com.googlecode.lanterna.input.Key;
 
-public class DialogWindow extends Window implements Runnable{//, WindowListener {
+import com.googlecode.lanterna.gui.*;
+import com.googlecode.lanterna.gui.component.Panel;
+
+import com.googlecode.lanterna.gui.component.Panel.Orientation;
+import com.googlecode.lanterna.gui.component.TextBox;
+
+import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.gui.component.Label;
+
+import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.gui.dialog.MessageBox;
+
+import com.googlecode.lanterna.gui.dialog.DialogButtons;
+
+public class DialogWindow extends MessageBox implements Runnable{//, WindowListener {
 
 	GUIScreen parent;
 	
-	public DialogWindow(GUIScreen parent){
-		super(Main.NAME);
+	public DialogWindow(GUIScreen parent, String name, String message, DialogButtons buttons){
+	
+		super(name, message, buttons);
 		this.parent = parent;
 	}
 
 	public void run(){
-		parent.showWindow(this);
-		//addWindowListener(this);
+		testPrint();
+		parent.showWindow(this, GUIScreen.Position.CENTER);
 	}
 
 	/*public void onWindowClosed(Window window){
-		System.out.println("To close");
-		//parent.getScreen().getTerminal().exitPrivateMode();
+		System.out.println("Close");
+		parent.getScreen().getTerminal().exitPrivateMode();
+	}*/
+	
+	public void testPrint(){
+	
+		/*System.out.println("testPrint");
+		
+		Panel horizontalPanel = new Panel(new Border.Invisible(), Panel.Orientation.HORISONTAL);
+
+        horizontalPanel.addComponent(horizontalPanel);
+		
+		MessageBox message = new MessageBox("Welcome!", "Welcome!", DialogButtons.OK);
+		super(String title, String message, DialogButtons buttons);
+		
+		horizontalPanel.addComponent(message);
+		
+		
+		/*horizontalPanel.addComponent( new Button("OK", new Action(){
+			public void doAction() {
+				System.out.println("Do Action");
+				close();
+				System.out.println("Action Done");
+				System.out.println("Refreshed");
+			}
+		}));
+		
+		//parent.getScreen().refresh();
+		
+		addComponent(horizontalPanel);
+		*/
 	}
 	
-	public void onWindowInvalidated(Window window){}
-	
-	public void onWindowShown(Window window){}
-	
+	public void onWindowInvalidated(Window window){}	
+	public void onWindowShown(Window window){}	
 	public void onUnhandledKeyboardInteraction(Window window, Key key){}
-	
-	public void onFocusChanged(Window window, Interactable fromComponent, Interactable toComponent){}*/
+	public void onFocusChanged(Window window, Interactable fromComponent, Interactable toComponent){}
 }

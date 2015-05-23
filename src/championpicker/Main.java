@@ -18,9 +18,13 @@ import java.util.HashMap;
 
 public class Main{
 
-	public static final String NAME = "Champion Picker";
+	public static final String WindowName = "Welcome!";
+	
+	public static void main(String[] args){
+		TerminalClass.createTerm();
+	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
 		// String json = "{\"pageInfo\": {\"pageName": "abc\",\"pagePic\": \"http://example.com/content.jpg\"}\"posts\":[{\"post_id\": \"123456789012_123456789012\",\"actor_id\": \"1234567890\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg\",\"nameOfPersonWhoPosted\": \"Jane Doe\",\"message\": \"Sounds cool. Can't wait to see it!\",\"likesCount\": \"2\",\"comments\": [],\"timeOfPost\": \"1234567890\"}]}";
 
@@ -35,15 +39,11 @@ public class Main{
 
 		//System.out.println(new JSONObject("{\"hi\":\"bye\"}").getString("hi"));
 
-		Path path = Paths.get("a_file.txt");
-		String content = "hello worlf!";
+		/*Path path = Paths.get("a_file.txt");
+		String content = "hello world!";
 		IO.writeToFile(content, path);
 
 		System.out.println(IO.readFromFile(path));
-	}
-
-	/*public static void main(String[] args){
-		TerminalClass.createTerm();
 	}*/
 	
 	/*public static void main(String[] args) throws Exception {
