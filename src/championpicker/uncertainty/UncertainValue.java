@@ -21,13 +21,7 @@ public class UncertainValue implements ChampStat {
         experiance = Integer.parseInt(str.substring(str.indexOf(delim) + delim.length()));
         assert toString().equals(str);
     }
-
-    // public static UncertainValue parseUncertainValue(String str) {
-    //     double value = Double.parseDouble(str.substring(0, str.indexOf("+") - 1).trim());
-    //     int confidence = Integer.parseInt(str.substring(str.indexOf("+c") + 3).trim());
-    //     return new UncertainValue(value, confidence);
-    // }
-
+    
     // rename
     public void translateValueToGoodBadFactorForm() {
         value = value * 2 - 1;
