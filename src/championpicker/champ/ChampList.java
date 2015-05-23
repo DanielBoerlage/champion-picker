@@ -2,23 +2,27 @@ package championpicker.champ;
 
 import championpicker.io.JSONable;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONStringer;
 
-public class ChampList extends ArrayList<Champ> implements JSONable {
+public class ChampList extends ArrayList<Champ> {
 
     public ChampList() {
         super();
     }
 
-    // public Champion getChampion(String name) {
-    //     for(Champion champion : this)
-    //         if(champion.getName().equals(name))
-    //             return champion;
-    //     return null;
-    // }
-    
-    public JSONObject toJSON() {
-        return null;
+    public JSONObject champStatsJSON() {
+        JSONObject json = new JSONObject();
+        for (Champ champ : this)
+            json.put(champ.getName(), champ.statsJSON());
+        return json;
     }
+
+    /*public JSONObject statsInJSON() {
+        JSONObject obj = new JSONObject();
+        for()
+    }*/
 }
