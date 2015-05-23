@@ -17,32 +17,20 @@ import java.util.*;
 
 public class Main{
 
-	public static final String WindowName = "Welcome!";
-	
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 		TerminalClass.createTerm();
-	}
+	}*/
 
-	/*public static void main(String[] args) {
-		
-		// String json = "{\"pageInfo\": {\"pageName": "abc\",\"pagePic\": \"http://example.com/content.jpg\"}\"posts\":[{\"post_id\": \"123456789012_123456789012\",\"actor_id\": \"1234567890\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg\",\"nameOfPersonWhoPosted\": \"Jane Doe\",\"message\": \"Sounds cool. Can't wait to see it!\",\"likesCount\": \"2\",\"comments\": [],\"timeOfPost\": \"1234567890\"}]}";
+	public static void main(String[] args) {
 
-		// JSONObject obj = new JSONObject(json);
-		// System.out.println(obj.getJSONObject("pageInfo").getString("pageName"));
-
-		// JSONArray arr = obj.getJSONArray("posts");
-		// for (int i = 0; i < arr.length(); i++)
-		// {
-		//     System.out.println(post_id = arr.getJSONObject(i).getString("post_id"));
-		// }
 
 		//System.out.println(new JSONObject("{\"hi\":\"bye\"}").getString("hi"));
 
-		/*Path path = Paths.get("a_file.txt");
-		String content = "hello world!";
-		IO.writeToFile(content, path);
-
-		System.out.println(IO.readFromFile(path));
+		// Path path = Paths.get("a_file.txt");
+		// String content = "hello world!";
+		// IO.writeToFile(content, path);
+		//
+		// System.out.println(IO.readFromFile(path));
 		// Map<String, String> map = new HashMap<String, String>();
 		// map.put("hi", "bysde");
 		// map.put("bye", "hiasd");
@@ -81,7 +69,7 @@ public class Main{
 		System.out.println(obj.toString(4));
 
 		// JSONStringer json = new JSONStringer();
-		// json	
+		// json
 		// 	.array()
 		// 		.value("hallo welt")
 		// 		.value("salut le monde")
@@ -111,8 +99,8 @@ public class Main{
 		// uv2.translateValueToGoodBadFactorForm();
 		// System.out.println(uv2.getValue() + " " + uv2.getExperiance());
 		// System.out.println(uv2.getBelief(.2));
-	}*/
-	
+	}
+
 	/*public static void main(String[] args) throws Exception {
 		GUIScreen textGUI = TerminalFacade.createGUIScreen();
 	    if(textGUI == null) {
