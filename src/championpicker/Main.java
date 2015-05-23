@@ -21,7 +21,7 @@ public class Main{
 		TerminalClass.createTerm();
 	}*/
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		ChampList champs = new ChampList();
 		Champ aatrox = new Champ("Aatrox");
 		Champ ahri = new Champ("Ahri");
@@ -40,6 +40,18 @@ public class Main{
 		IO.writeObjectToFile(champs, "champ_stats.ser");
 		ChampList read = (ChampList)IO.readObjectFromFile("champ_stats.ser");
 		System.out.println(read);
+	}*/
+
+	public static void main(String[] args) {
+		RiotAPI api = new RiotAPI();
+		System.out.println(api.getChampList());
+		// System.out.println(Champ.names);
+		// Champ.names.put(1, "Annie");
+		// System.out.println(Champ.names);
+		// System.out.println();
+		// Champ annie = new Champ(1);
+		// System.out.println(annie);
+		//System.out.println(IO.readFromWebpage("https://google.com"));
 	}
 
 	/*public static void main(String[] args) {

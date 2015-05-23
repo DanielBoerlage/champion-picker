@@ -3,7 +3,7 @@ package championpicker.io;
 import championpicker.console.Output;
 
 import java.io.IOException;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.Files;
 
 import java.io.FileOutputStream;
@@ -12,22 +12,28 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 import java.io.FileNotFoundException;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+import java.net.URL;
+import java.net.MalformedURLException;
+
 public class IO {
 
-	public static String readFromFile(Path path) {
+	public static String readFromFile(String path) {
 		try {
-            return new String(Files.readAllBytes(path));
+            return new String(Files.readAllBytes(Paths.get(path)));
         } catch (IOException e) {
-            Output.err("IO Error reading from file " + path);
+            Output.err("IO Error reading from file " + path + ". " + e.getMessage());
         }
         return "";
 	}
 
-	public static void writeToFile(String str, Path path) {
+	public static void writeToFile(String str, String path) {
 		try {
-			Files.write(path, str.getBytes());
+			Files.write(Paths.get(path), str.getBytes());
 		} catch (IOException e) {
-			Output.err("IO Error writing to file " + path);
+			Output.err("IO Error writing to file " + path + ". " + e.getMessage());
 		}
 	}
 
@@ -52,5 +58,18 @@ public class IO {
 		} catch (IOException e) {
 			Output.err("IO Error writing to file " + path + ". " + e.getMessage());
 		}
+	}
+
+	public static String readFromWebpage(String url) {
+		String line, out = "";
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(url).openStream()))) {
+			while((line = reader.readLine()) != null) out += line;
+		} catch (MalformedURLException e) {
+			Output.err("Badly formated URL Error " + url + ". " + e.getMessage());
+		} catch (IOException e) {
+			Output.err("IO Error reading from URL " + url + ". " + e.getMessage());
+		}
+		return out;
+
 	}
 }
