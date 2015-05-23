@@ -1,10 +1,12 @@
 package championpicker.uncertainty;
 
+import java.io.Serializable;
+
 import championpicker.champ.ChampStat;
 
 import static java.lang.Math.tanh;
 
-public class UncertainValue implements ChampStat {
+public class UncertainValue implements ChampStat, Serializable {
 
     private static final String delim = "?";
 
@@ -21,7 +23,7 @@ public class UncertainValue implements ChampStat {
         experiance = Integer.parseInt(str.substring(str.indexOf(delim) + delim.length()));
         assert toString().equals(str);
     }
-    
+
     // rename
     public void translateValueToGoodBadFactorForm() {
         value = value * 2 - 1;
@@ -40,7 +42,7 @@ public class UncertainValue implements ChampStat {
         return experiance;
     }
 
-    public String toString() {         
+    public String toString() {
         return value + delim + experiance;
     }
 

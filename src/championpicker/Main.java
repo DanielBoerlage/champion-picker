@@ -22,6 +22,27 @@ public class Main{
 	}*/
 
 	public static void main(String[] args) {
+		ChampList champs = new ChampList();
+		Champ aatrox = new Champ("Aatrox");
+		Champ ahri = new Champ("Ahri");
+		champs.add(aatrox);
+		champs.add(ahri);
+		aatrox.addStat("PickRate", new UncertainValue(.5, 0));
+		aatrox.addStat("BanRate", new UncertainValue(.3, 6));
+		ahri.addStat("PickRate", new UncertainValue(.2, 10));
+		ahri.addStat("BanRate", new UncertainValue(0, 0));
+		//HashMap<Champ, UncertainValue> ga = new HashMap<Champ, UncertainValue>();
+		RelationalChampMap aatroxGA = new RelationalChampMap();
+		aatrox.addStat("GoodWith", aatroxGA);
+		aatroxGA.put(aatrox, new UncertainValue(.5, 32));
+		aatroxGA.put(ahri, new UncertainValue(.7, 1));
+		System.out.println(champs + "  " + champs.champStatsJSON());
+		IO.writeObjectToFile(champs, "champ_stats.ser");
+		ChampList read = (ChampList)IO.readObjectFromFile("champ_stats.ser");
+		System.out.println(read + "  " + read.champStatsJSON());
+	}
+
+	/*public static void main(String[] args) {
 
 
 		//System.out.println(new JSONObject("{\"hi\":\"bye\"}").getString("hi"));
@@ -99,7 +120,7 @@ public class Main{
 		// uv2.translateValueToGoodBadFactorForm();
 		// System.out.println(uv2.getValue() + " " + uv2.getExperiance());
 		// System.out.println(uv2.getBelief(.2));
-	}
+	}*/
 
 	/*public static void main(String[] args) throws Exception {
 		GUIScreen textGUI = TerminalFacade.createGUIScreen();

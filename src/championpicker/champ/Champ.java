@@ -10,18 +10,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Champ {
+import java.io.Serializable;
+
+public class Champ implements Serializable {
 
     private String name;
 
-    private Map<String, ChampStat> stats;
+    private Map<String, Object> stats;
 
     public Champ(String name) {
         this.name = name;
-        stats = new HashMap<String, ChampStat>();
+        stats = new HashMap<String, Object>();
     }
 
-    public void addStat(String key, ChampStat stat) {
+    public void addStat(String key, Object stat) {
         stats.put(key, stat);
     }
 
@@ -35,8 +37,8 @@ public class Champ {
 
      public JSONObject statsJSON() {
         JSONObject json = new JSONObject();
-        for(Map.Entry<String, ChampStat> stat : stats.entrySet())
-            json.put(stat.getKey(), stat.getValue().statValue());
+        for(Map.Entry<String, Object> stat : stats.entrySet())
+            json.put(stat.getKey(), ((ChampStat)stat.getValue()).statValue());
         return json;
     }
 
