@@ -13,8 +13,7 @@ import org.json.*;
 import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.TerminalFacade;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 public class Main{
 
@@ -34,12 +33,63 @@ public class Main{
 		// }
 
 		//System.out.println(new JSONObject("{\"hi\":\"bye\"}").getString("hi"));
+		// Map<String, String> map = new HashMap<String, String>();
+		// map.put("hi", "bysde");
+		// map.put("bye", "hiasd");
+		// JSONObject json = new JSONObject((Map)map);
+		// System.out.println(json);
 
-		Path path = Paths.get("a_file.txt");
-		String content = "hello worlf!";
-		IO.writeToFile(content, path);
+		// Path path = Paths.get("a_file.txt");
+		// String content = "hello worlf!";
+		// IO.writeToFile(content, path);
 
-		System.out.println(IO.readFromFile(path));
+		// System.out.println(IO.readFromFile(path));
+
+		// ChampList champs = new ChampList();
+		// champs.add(new StatisticalChamp("Aatrox"));
+		// champs.add(new StatisticalChamp("Ahri"));
+		// System.out.println(champs);
+		// System.out.println(champs.toJSONArray());
+		// JSONObject obj = new JSONObject();
+		// obj.put("champs", champs.toJSONArray());
+		// System.out.println(obj.toString(4));
+
+		ChampList champs = new ChampList();
+		StatisticalChamp aatrox = new StatisticalChamp("Aatrox");
+		aatrox.addStat("PickRate", new UncertainValue(.5, 0));
+
+
+		// JSONStringer json = new JSONStringer();
+		// json	
+		// 	.array()
+		// 		.value("hallo welt")
+		// 		.value("salut le monde")
+		// 	.endArray();
+
+		// System.out.println(json);
+
+		// JSONArray arr = new JSONArray(json.toString());
+		// JSONObject obj = new JSONObject();
+		// obj.put("greetings", arr);
+
+		// System.out.println(arr);
+		// System.out.println(obj);
+
+		//String[] arr = {"a", "b", "c"};
+		//Collection c = Arrays.asList(arr);
+		//System.out.println(new JSONArray((Collection)c));
+
+
+
+
+		// UncertainValue uv = new UncertainValue(.3, 20);
+		// System.out.println(uv);
+		// UncertainValue uv2 = new UncertainValue(uv.toString());
+		// System.out.println(uv2);
+		// System.out.println(uv2.getValue() + " " + uv2.getExperiance());
+		// uv2.translateValueToGoodBadFactorForm();
+		// System.out.println(uv2.getValue() + " " + uv2.getExperiance());
+		// System.out.println(uv2.getBelief(.2));
 	}
 
 	/*public static void main(String[] args){
