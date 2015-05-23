@@ -16,11 +16,11 @@ public class Champ {// implements JSONable {
 
     //private List<ChampionStat> stats;
 
-    private Map<String, Object> stats;
+    private Map<String, ChampStat> stats;
 
     public Champ(String name) {
         this.name = name;
-        stats = new HashMap<String, Object>();
+        stats = new HashMap<String, ChampStat>();
     }
 
     //public Champion(String name) {
@@ -32,7 +32,7 @@ public class Champ {// implements JSONable {
     //    stats.add(stat);
     //}
 
-    public void addStat(String key, Object stat) {
+    public void addStat(String key, ChampStat stat) {
         stats.put(key, stat);
     }
 
@@ -51,10 +51,10 @@ public class Champ {// implements JSONable {
     //     return ((Champion)obj).getName().equals(name);
     // }
 
-     public JSONObject getStats() {
+     public JSONObject statsJSON() {
         JSONObject json = new JSONObject();
-        for(Map.Entry<String, Object> stat : stats.entrySet())
-            json.put(stat.getKey(), stat.getValue().toString());
+        for(Map.Entry<String, ChampStat> stat : stats.entrySet())
+            json.put(stat.getKey(), stat.getValue().statValue());
         return json;
         //return new JSONObject(stats); <-- treats stat as a bean object
     }

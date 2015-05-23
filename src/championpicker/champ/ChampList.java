@@ -53,12 +53,16 @@ public class ChampList extends ArrayList<Champ> {
     //     return json;
     // }
 
+    // public JSONObject champListJSON() {
+    //     JSONObject json = new JSONObject();
+    //     for (Champ champ : this)
+    //         json
+    // }
 
     public JSONObject champStatsJSON() {
         JSONObject json = new JSONObject();
-        for (Champ champ : this) {
-            json.put(champ.getName(), champ.getStats());
-        }
+        for (Champ champ : this)
+            json.put(champ.getName(), champ.statsJSON());
         return json;
     }
 

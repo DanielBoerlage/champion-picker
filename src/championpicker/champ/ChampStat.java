@@ -1,7 +1,7 @@
-// package championpicker.champ;
+package championpicker.champ;
 
 // import java.util.ArrayList;
 
-// public class ChampStats extends ArrayList<Champ> {
-    
-// }
+public interface ChampStat {
+    public Object statValue();
+}

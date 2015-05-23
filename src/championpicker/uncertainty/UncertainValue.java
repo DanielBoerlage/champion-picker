@@ -1,10 +1,10 @@
 package championpicker.uncertainty;
 
-//import championpicker.champ.ChampStat;
+import championpicker.champ.ChampStat;
 
 import static java.lang.Math.tanh;
 
-public class UncertainValue {
+public class UncertainValue implements ChampStat {
 
     private static final String delim = "?";
 
@@ -48,5 +48,9 @@ public class UncertainValue {
 
     public String toString() {         
         return value + delim + experiance;
+    }
+
+    public Object statValue() {
+        return toString();
     }
 }

@@ -3,11 +3,11 @@ package championpicker.uncertainty;
 import java.util.Map;
 import java.util.HashMap;
 import championpicker.champ.Champ;
-//import championpicker.champ.ChampStat;
+import championpicker.champ.ChampStat;
 
 import org.json.JSONObject;
 
-public class RelationalChampMap extends HashMap<Champ, UncertainValue> {
+public class RelationalChampMap extends HashMap<Champ, UncertainValue> implements ChampStat {
 
     public RelationalChampMap() {
         super();
@@ -36,11 +36,11 @@ public class RelationalChampMap extends HashMap<Champ, UncertainValue> {
     //     return name;
     // }
 
-    public String toString() {
+    public Object statValue() {
         JSONObject json = new JSONObject();
         for(Map.Entry<Champ, UncertainValue> champ : entrySet())
             json.put(champ.getKey().getName(), champ.getValue().toString());
-        return json.toString();
+        return json;
     }
 
     // public Object value() {

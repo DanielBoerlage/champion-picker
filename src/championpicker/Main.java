@@ -67,7 +67,7 @@ public class Main{
 		aatrox.addStat("GoodWith", aatroxGA);
 		ahri.addStat("PickRate", new UncertainValue(.2, 10));
 		ahri.addStat("BanRate", new UncertainValue(0, 0));
-		JSONObject obj = champs.toJSON();
+		JSONObject obj = champs.champStatsJSON();
 		System.out.println(obj.toString(4));
 
 		// JSONStringer json = new JSONStringer();
