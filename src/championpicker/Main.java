@@ -31,15 +31,15 @@ public class Main{
 		aatrox.addStat("BanRate", new UncertainValue(.3, 6));
 		ahri.addStat("PickRate", new UncertainValue(.2, 10));
 		ahri.addStat("BanRate", new UncertainValue(0, 0));
-		//HashMap<Champ, UncertainValue> ga = new HashMap<Champ, UncertainValue>();
-		RelationalChampMap aatroxGA = new RelationalChampMap();
+		HashMap<Champ, UncertainValue> aatroxGA = new HashMap<Champ, UncertainValue>();
+		//RelationalChampMap aatroxGA = new RelationalChampMap();
 		aatrox.addStat("GoodWith", aatroxGA);
 		aatroxGA.put(aatrox, new UncertainValue(.5, 32));
 		aatroxGA.put(ahri, new UncertainValue(.7, 1));
-		System.out.println(champs + "  " + champs.champStatsJSON());
+		System.out.println(champs);
 		IO.writeObjectToFile(champs, "champ_stats.ser");
 		ChampList read = (ChampList)IO.readObjectFromFile("champ_stats.ser");
-		System.out.println(read + "  " + read.champStatsJSON());
+		System.out.println(read);
 	}
 
 	/*public static void main(String[] args) {

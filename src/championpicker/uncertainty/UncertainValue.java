@@ -2,11 +2,9 @@ package championpicker.uncertainty;
 
 import java.io.Serializable;
 
-import championpicker.champ.ChampStat;
-
 import static java.lang.Math.tanh;
 
-public class UncertainValue implements ChampStat, Serializable {
+public class UncertainValue implements Serializable {
 
     private static final String delim = "?";
 
@@ -44,9 +42,5 @@ public class UncertainValue implements ChampStat, Serializable {
 
     public String toString() {
         return value + delim + experiance;
-    }
-
-    public Object statValue() {
-        return toString();
     }
 }

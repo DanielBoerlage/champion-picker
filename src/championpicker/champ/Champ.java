@@ -1,15 +1,7 @@
 package championpicker.champ;
 
-import championpicker.uncertainty.UncertainValue;
-//import championpicker.io.JSONable;
-
-import org.json.JSONObject;
-
 import java.util.Map;
 import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
-
 import java.io.Serializable;
 
 public class Champ implements Serializable {
@@ -29,17 +21,6 @@ public class Champ implements Serializable {
 
     public String getName() {
         return name;
-    }
-
-    // public boolean equals(Object obj) {
-    //     return ((Champion)obj).getName().equals(name);
-    // }
-
-     public JSONObject statsJSON() {
-        JSONObject json = new JSONObject();
-        for(Map.Entry<String, Object> stat : stats.entrySet())
-            json.put(stat.getKey(), ((ChampStat)stat.getValue()).statValue());
-        return json;
     }
 
     public String toString() {
