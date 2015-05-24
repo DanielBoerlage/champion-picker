@@ -10,7 +10,7 @@ public class Champ implements Serializable {
 
     private String name;
     private int id;
-    private UncertainValue pickRate;
+    public UncertainValue pickRate;
 
     //private Map<String, Object> stats;
 
@@ -18,10 +18,6 @@ public class Champ implements Serializable {
         this.name = name;
         this.id = id;
         //stats = new HashMap<String, Object>();
-    }
-
-    public UncertainValue getPickRate() {
-        return pickRate;
     }
 
     //public void addStat(String key, Object stat) {
@@ -34,6 +30,10 @@ public class Champ implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public String getPickRate() {
+        return pickRate.toString();
     }
 
     public String toString() {

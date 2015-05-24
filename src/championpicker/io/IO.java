@@ -61,6 +61,7 @@ public class IO {
 	}
 
 	public static String readFromWebpage(String url) {
+		System.out.println("querying " + url);
 		String line, out = "";
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(url).openStream()))) {
 			while((line = reader.readLine()) != null) out += line;

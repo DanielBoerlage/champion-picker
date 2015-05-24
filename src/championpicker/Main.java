@@ -46,10 +46,29 @@ public class Main{
 	public static String message;
 
 	public static void main(String[] args) {
+
 		RiotAPI api = new RiotAPI();
 		System.out.println(api.getChampList());
 		
-		TerminalClass.createTerm();
+		RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2");
+		if(new File("champ_list.ser").exists()) {
+			ChampList.master = (ChampList)IO.readObjectFromFile("champ_list.ser");
+		} else {
+			ChampList.master = api.fetchChampList();
+			IO.writeObjectToFile(ChampList.master, "champ_list.ser");
+		}
+		System.out.println(api.fetchGamesBFS(100, api.fetchSummoner("sam"), "RANKED_TEAM_3x3"));
+		//System.out.println(api.getChampList());
+		//System.out.println(api.getSummoner("quikhead").getId());
+
+		// Champ ahri = new Champ("Ahri", 54);
+		// ahri.pickRate = new UncertainValue(.4, 20);
+
+		// System.out.println(new JSONObject(ahri).toString(4));
+
+		// RiotAPI api = new RiotAPI(new JSONObject(IO.readFromFile("api.json")));
+		// System.out.println(api.fetchChampList());
+
 		// System.out.println(Champ.names);
 		// Champ.names.put(1, "Annie");
 		// System.out.println(Champ.names);
