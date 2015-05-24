@@ -12,6 +12,7 @@ import championpicker.game.GameList;
 import java.util.Iterator;
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.ArrayList;
 import java.io.Serializable;
 
 public class RiotAPI implements Serializable {
@@ -24,7 +25,7 @@ public class RiotAPI implements Serializable {
     public RiotAPI(String region, String apiKey) {
         this.region = region;
         this.apiKey = apiKey;
-        rateLimit = 1210;
+        rateLimit = 1205;
         lastFetch = 0;
     }
 
@@ -34,7 +35,9 @@ public class RiotAPI implements Serializable {
     // }
 
     private String createURL(String extension) {
-            return "https://" + region + ".api.pvp.net/" + extension + "?api_key=" + apiKey;
+        if(extension.contains("?"))
+            return "https://" + region + ".api.pvp.net/" + extension + "&api_key=" + apiKey;
+        return "https://" + region + ".api.pvp.net/" + extension + "?api_key=" + apiKey;
     }
 
     private JSONObject fetchJSON(String extension) {
@@ -65,39 +68,53 @@ public class RiotAPI implements Serializable {
     public GameList fetchGamesBFS(int n, Summoner root, String type) {
         GameList games = new GameList();
         Queue<Summoner> queue = new LinkedList<Summoner>();
+        ArrayList<Summoner> visited = new ArrayList<Summoner>();
         queue.add(root);
+        visited.add(root);
         while(games.size() < n && !queue.isEmpty()) {
+            System.out.println("queue size: " + queue.size());
+            System.out.println("games size: " + games.size());
             Summoner current = queue.remove();
-            JSONObject json = fetchJSON("api/lol/" + region + "/v1.3/game/by-summoner/" + current.getId() + "/recent");
-            JSONArray gameArr = json.getJSONArray("games");
+            JSONObject json = fetchJSON("api/lol/" + region + "/v2.2/matchhistory/" + current.getId() + "?rankedQueues=" + type);
+            JSONArray gameArr = json.getJSONArray("matches");
             for(int i = 0; i < gameArr.length(); i++) {
                 JSONObject game = gameArr.getJSONObject(i);
-                if(!game.getString("subType").equals(type)) continue;
-                long gameId = game.getLong("gameId");
-                if(!games.containsId(gameId))
-                    games.add(fetchGame(gameId));
-                JSONArray fellowPlayers = game.getJSONArray("fellowPlayers");
-                for(int j = 0; j < fellowPlayers.length(); j++) {
-                    Summoner newSummoner = new Summoner(fellowPlayers.getJSONObject(j).getLong("summonerId"));
-                    if(!queue.contains(newSummoner))
-                        queue.add(newSummoner);
+                long gameId = game.getLong("matchId");
+                if(!games.containsId(gameId)) {
+                    JSONObject gameData = fetchJSON("api/lol/" + region + "/v2.2/match/" + gameId);
+                    games.add(new Game(gameData));
+                    System.out.println("Added new game");
+                    JSONArray participants = gameData.getJSONArray("participantIdentities");
+                    for(int j = 0; j < participants.length(); j++) {
+                        JSONObject player = participants.getJSONObject(j).getJSONObject("player");
+                        Summoner branch = new Summoner(player.getString("summonerName"), player.getLong("summonerId"));
+                        if(!visited.contains(branch)) {
+                            queue.add(branch);
+                            visited.add(branch);
+                            System.out.println("Found summoner (new): " + branch.getName());
+                        } else {
+                            System.out.println("Found summoner (alread exists): " + branch.getName());
+                        }
+                    }
+                } else {
+                    System.out.println("Game already exists");
                 }
             }
         }
         return games;
     }
 
-    public GameList fetchRecentGames(Summoner summoner, String type) {
-        GameList games = new GameList();
-        JSONObject json = fetchJSON("api/lol/" + region + "/v1.3/game/by-summoner/" + summoner.getId() + "/recent");
-        JSONArray gameArr = json.getJSONArray("games");
-        for(int i = 0; i < gameArr.length(); i++) {
-            JSONObject game = gameArr.getJSONObject(i);
-            if(game.getString("subType").equals(type))
-                games.add(fetchGame(game.getLong("gameId")));
-        }
-        return games;
-    }
+    // public GameList fetchRecentGames(Summoner summoner, String type) {
+    //     GameList games = new GameList();
+    //     JSONObject json = fetchJSON("api/lol/" + region + "/v1.3/game/by-summoner/" + summoner.getId() + "/recent");
+    //     JSONArray gameArr = json.getJSONArray("games");
+    //     for(int i = 0; i < gameArr.length(); i++) {
+    //         JSONObject game = gameArr.getJSONObject(i);
+    //         if(game.getString("subType").equals(type))
+    //             games.add(fetchGame(game.getLong("gameId")));
+    //     }
+    //     return games;
+    // }
 
     public Game fetchGame(long gameId) {
         return new Game(fetchJSON("api/lol/" + region + "/v2.2/match/" + gameId));
