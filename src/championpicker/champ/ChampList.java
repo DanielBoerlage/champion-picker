@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class ChampList extends ArrayList<Champ> {
 
+    public static ChampList master;
+
     public ChampList() {
         super();
     }

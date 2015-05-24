@@ -16,7 +16,7 @@ public class Game {
 	// 	this.id = id;
 	// }
 
-	public Game(JSONObject json, ChampList champs) {
+	public Game(JSONObject json) {
 		id = json.getLong("matchId");
 		JSONArray participants = json.getJSONArray("participants");
 		int teamSize = participants.length() / 2;
@@ -24,10 +24,10 @@ public class Game {
 		team1 = new Team();
 		for(int i = 0; i < teamSize; i++) {
 			JSONObject player = participants.getJSONObject(i);
-			team0.add(champs.byId(player.getInt("championId")));
+			team0.add(ChampList.master.byId(player.getInt("championId")));
 
 			player = participants.getJSONObject(i + teamSize);
-			team1.add(champs.byId(player.getInt("championId")));
+			team1.add(ChampList.master.byId(player.getInt("championId")));
 		}
 	}
 

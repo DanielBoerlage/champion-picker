@@ -22,7 +22,7 @@ public class RiotAPI implements Serializable {
     public RiotAPI(String region, String apiKey) {
         this.region = region;
         this.apiKey = apiKey;
-        rateLimit = 1201;
+        rateLimit = 1210;
         lastFetch = 0;
     }
 
@@ -60,17 +60,20 @@ public class RiotAPI implements Serializable {
         return champs;
     }
 
-    public GameList fetchRecentGames(Summoner summoner, ChampList champs) {
+    public GameList fetchRecentGames(Summoner summoner, String type) {
         GameList games = new GameList();
         JSONObject json = fetchJSON("api/lol/" + region + "/v1.3/game/by-summoner/" + summoner.getId() + "/recent");
         JSONArray gameArr = json.getJSONArray("games");
-        for(int i = 0; i < gameArr.length(); i++)
-            games.add(fetchGame(gameArr.getJSONObject(i).getLong("gameId"), champs));
+        for(int i = 0; i < gameArr.length(); i++) {
+            JSONObject game = gameArr.getJSONObject(i);
+            if(game.getString("subType").equals(type))
+                games.add(fetchGame(game.getLong("gameId")));
+        }
         return games;
     }
 
-    public Game fetchGame(long gameId, ChampList champs) {
-        return new Game(fetchJSON("api/lol/" + region + "/v2.2/match/" + gameId), champs);
+    public Game fetchGame(long gameId) {
+        return new Game(fetchJSON("api/lol/" + region + "/v2.2/match/" + gameId));
     }
 
     public Summoner fetchSummoner(String name) {

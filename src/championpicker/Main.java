@@ -44,8 +44,13 @@ public class Main{
 
 	public static void main(String[] args) {
 		RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2");
-		ChampList champs = api.fetchChampList();
-		System.out.println(api.fetchRecentGames(api.fetchSummoner("quikhead"), champs));
+		if(new File("champ_list.ser").exists()) {
+			ChampList.master = (ChampList)IO.readObjectFromFile("champ_list.ser");
+		} else {
+			ChampList.master = api.fetchChampList();
+			IO.writeObjectToFile(ChampList.master, "champ_list.ser");
+		}
+		System.out.println(api.fetchRecentGames(api.fetchSummoner("quikhead"), "RANKED_TEAM_3x3"));
 		//System.out.println(api.getChampList());
 		//System.out.println(api.getSummoner("quikhead").getId());
 
