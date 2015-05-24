@@ -43,8 +43,18 @@ public class Main{
 	}*/
 
 	public static void main(String[] args) {
-		RiotAPI api = new RiotAPI();
-		System.out.println(api.getChampList());
+		RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2");
+		//System.out.println(api.getChampList());
+		//System.out.println(api.getSummoner("quikhead").getId());
+
+		// Champ ahri = new Champ("Ahri", 54);
+		// ahri.pickRate = new UncertainValue(.4, 20);
+
+		// System.out.println(new JSONObject(ahri).toString(4));
+
+		// RiotAPI api = new RiotAPI(new JSONObject(IO.readFromFile("api.json")));
+		// System.out.println(api.fetchChampList());
+
 		// System.out.println(Champ.names);
 		// Champ.names.put(1, "Annie");
 		// System.out.println(Champ.names);
