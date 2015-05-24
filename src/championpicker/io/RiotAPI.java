@@ -15,10 +15,15 @@ import java.io.Serializable;
 public class RiotAPI implements Serializable {
 
     private final String region, apiKey;
+    private final long rateLimit;
+    private transient long lastFetch;
+
 
     public RiotAPI(String region, String apiKey) {
         this.region = region;
         this.apiKey = apiKey;
+        rateLimit = 1201;
+        lastFetch = 0;
     }
 
     // public RiotAPI(JSONObject json) {
@@ -31,6 +36,16 @@ public class RiotAPI implements Serializable {
     }
 
     private JSONObject fetchJSON(String extension) {
+        long current = System.currentTimeMillis();
+        if(current - lastFetch < rateLimit) {
+            try {
+                Thread.sleep(rateLimit - (current - lastFetch));
+                current = System.currentTimeMillis();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        lastFetch = current;
         return new JSONObject(IO.readFromWebpage(createURL(extension)));
     }
 
@@ -47,7 +62,7 @@ public class RiotAPI implements Serializable {
 
     public GameList fetchRecentGames(Summoner summoner, ChampList champs) {
         GameList games = new GameList();
-        JSONObject json = fetchJSON("api/lol/" + region + "v1.3/game/by-summoner/" + summoner.getId() + "recent");
+        JSONObject json = fetchJSON("api/lol/" + region + "/v1.3/game/by-summoner/" + summoner.getId() + "/recent");
         JSONArray gameArr = json.getJSONArray("games");
         for(int i = 0; i < gameArr.length(); i++)
             games.add(fetchGame(gameArr.getJSONObject(i).getLong("gameId"), champs));

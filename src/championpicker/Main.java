@@ -45,7 +45,7 @@ public class Main{
 	public static void main(String[] args) {
 		RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2");
 		ChampList champs = api.fetchChampList();
-		System.out.println(api.fetchGame(1811266170, champs));
+		System.out.println(api.fetchRecentGames(api.fetchSummoner("quikhead"), champs));
 		//System.out.println(api.getChampList());
 		//System.out.println(api.getSummoner("quikhead").getId());
 
