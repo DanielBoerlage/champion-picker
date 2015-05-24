@@ -50,7 +50,7 @@ public class Main{
 			ChampList.master = api.fetchChampList();
 			IO.writeObjectToFile(ChampList.master, "champ_list.ser");
 		}
-		System.out.println(api.fetchGamesBFS(30, api.fetchSummoner("quikhead"), "RANKED_TEAM_3x3"));
+		System.out.println(api.fetchGamesBFS(100, api.fetchSummoner("sam"), "RANKED_TEAM_3x3"));
 		//System.out.println(api.getChampList());
 		//System.out.println(api.getSummoner("quikhead").getId());
 
