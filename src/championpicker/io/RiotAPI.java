@@ -10,6 +10,8 @@ import championpicker.game.Game;
 import championpicker.game.GameList;
 
 import java.util.Iterator;
+import java.util.Queue;
+import java.util.LinkedList;
 import java.io.Serializable;
 
 public class RiotAPI implements Serializable {
@@ -58,6 +60,31 @@ public class RiotAPI implements Serializable {
             champs.add(new Champ(champ.getString("name"), champ.getInt("id")));
         }
         return champs;
+    }
+
+    public GameList fetchGamesBFS(int n, Summoner root, String type) {
+        GameList games = new GameList();
+        Queue<Summoner> queue = new LinkedList<Summoner>();
+        queue.add(root);
+        while(games.size() < n && !queue.isEmpty()) {
+            Summoner current = queue.remove();
+            JSONObject json = fetchJSON("api/lol/" + region + "/v1.3/game/by-summoner/" + current.getId() + "/recent");
+            JSONArray gameArr = json.getJSONArray("games");
+            for(int i = 0; i < gameArr.length(); i++) {
+                JSONObject game = gameArr.getJSONObject(i);
+                if(!game.getString("subType").equals(type)) continue;
+                long gameId = game.getLong("gameId");
+                if(!games.containsId(gameId))
+                    games.add(fetchGame(gameId));
+                JSONArray fellowPlayers = game.getJSONArray("fellowPlayers");
+                for(int j = 0; j < fellowPlayers.length(); j++) {
+                    Summoner newSummoner = new Summoner(fellowPlayers.getJSONObject(j).getLong("summonerId"));
+                    if(!queue.contains(newSummoner))
+                        queue.add(newSummoner);
+                }
+            }
+        }
+        return games;
     }
 
     public GameList fetchRecentGames(Summoner summoner, String type) {

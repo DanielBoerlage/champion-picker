@@ -31,6 +31,10 @@ public class Game {
 		}
 	}
 
+	public long getId() {
+		return id;
+	}
+
 	public String toString() {
 		return team0 + " vs " + team1;
 	}
