@@ -1,10 +1,13 @@
 package championpicker.io;
 
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 import championpicker.champ.Champ;
 import championpicker.champ.ChampList;
 import championpicker.summoner.Summoner;
+import championpicker.game.Game;
+import championpicker.game.GameList;
 
 import java.util.Iterator;
 import java.io.Serializable;
@@ -27,10 +30,13 @@ public class RiotAPI implements Serializable {
             return "https://" + region + ".api.pvp.net/" + extension + "?api_key=" + apiKey;
     }
 
+    private JSONObject fetchJSON(String extension) {
+        return new JSONObject(IO.readFromWebpage(createURL(extension)));
+    }
+
     public ChampList fetchChampList() {
         ChampList champs = new ChampList();
-        JSONObject json = new JSONObject(IO.readFromWebpage(createURL("api/lol/static-data/" + region + "/v1.2/champion")));
-        json = json.getJSONObject("data");
+        JSONObject json = fetchJSON("api/lol/static-data/" + region + "/v1.2/champion").getJSONObject("data");
         Iterator<String> iter = json.keys();
         while(iter.hasNext()) {
             JSONObject champ = json.getJSONObject(iter.next());
@@ -39,15 +45,22 @@ public class RiotAPI implements Serializable {
         return champs;
     }
 
-    // public GameList getRecentGames(Summoner summoner) {
-    //     GameList games = new GameList();
-    //
-    // }
+    public GameList fetchRecentGames(Summoner summoner, ChampList champs) {
+        GameList games = new GameList();
+        JSONObject json = fetchJSON("api/lol/" + region + "v1.3/game/by-summoner/" + summoner.getId() + "recent");
+        JSONArray gameArr = json.getJSONArray("games");
+        for(int i = 0; i < gameArr.length(); i++)
+            games.add(fetchGame(gameArr.getJSONObject(i).getLong("gameId"), champs));
+        return games;
+    }
+
+    public Game fetchGame(long gameId, ChampList champs) {
+        return new Game(fetchJSON("api/lol/" + region + "/v2.2/match/" + gameId), champs);
+    }
 
     public Summoner fetchSummoner(String name) {
-        JSONObject json = new JSONObject(IO.readFromWebpage(createURL("api/lol/" + region + "/v1.4/summoner/by-name/" + name)));
-        JSONObject summ = json.getJSONObject(name);
-        return new Summoner(name, summ.getLong("id"));
+        JSONObject summoner = fetchJSON("api/lol/" + region + "/v1.4/summoner/by-name/" + name).getJSONObject(name);
+        return new Summoner(name, summoner.getLong("id"));
     }
 
     public String getRegion() {
