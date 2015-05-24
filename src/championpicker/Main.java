@@ -41,10 +41,15 @@ public class Main{
 		ChampList read = (ChampList)IO.readObjectFromFile("champ_stats.ser");
 		System.out.println(read);
 	}*/
+	
+	public static String title;
+	public static String message;
 
 	public static void main(String[] args) {
 		RiotAPI api = new RiotAPI();
 		System.out.println(api.getChampList());
+		
+		TerminalClass.createTerm();
 		// System.out.println(Champ.names);
 		// Champ.names.put(1, "Annie");
 		// System.out.println(Champ.names);

@@ -14,6 +14,7 @@ import com.googlecode.lanterna.terminal.swing.SwingTerminal;
 import com.googlecode.lanterna.screen.Screen;
 
 import com.googlecode.lanterna.gui.dialog.DialogButtons;
+import championpicker.Main;
 
 //import com.googlecode.lanterna.gui.listener.WindowAdapter;
 
@@ -31,8 +32,11 @@ public class TerminalClass{
 		GUIScreen testGUI = new GUIScreen(screen);
 
 		//term.enterPrivateMode();
+		
+		Main.title = "Header";
+		Main.message = "Body";
 
-		DialogWindow helloWorld = new DialogWindow(testGUI, "Name", "message", DialogButtons.OK);
+		DialogWindow helloWorld = new DialogWindow(testGUI, Main.title, Main.message, DialogButtons.OK);
 
 		JFrame frame = ((SwingTerminal)term).getJFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

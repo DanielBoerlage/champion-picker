@@ -37,7 +37,6 @@ public class DialogWindow extends MessageBox implements Runnable{//, WindowListe
 	}
 
 	public void run(){
-		testPrint();
 		parent.showWindow(this, GUIScreen.Position.CENTER);
 	}
 
@@ -46,7 +45,7 @@ public class DialogWindow extends MessageBox implements Runnable{//, WindowListe
 		parent.getScreen().getTerminal().exitPrivateMode();
 	}*/
 	
-	public void testPrint(){
+	//public void testPrint(){
 	
 		/*System.out.println("testPrint");
 		
@@ -73,7 +72,7 @@ public class DialogWindow extends MessageBox implements Runnable{//, WindowListe
 		
 		addComponent(horizontalPanel);
 		*/
-	}
+	//}
 	
 	public void onWindowInvalidated(Window window){}	
 	public void onWindowShown(Window window){}	
