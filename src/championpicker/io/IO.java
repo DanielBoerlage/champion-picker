@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.ObjectOutputStream;
@@ -17,6 +18,8 @@ import java.io.InputStreamReader;
 
 import java.net.URL;
 import java.net.MalformedURLException;
+
+import org.json.JSONObject;
 
 public class IO {
 
@@ -37,28 +40,40 @@ public class IO {
 		}
 	}
 
-	public static Object readObjectFromFile(String path) {
-		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(path))) {
-			return in.readObject();
-		} catch (FileNotFoundException e) {
-			Output.err("Error creating/accessing file " + path + ". " + e.getMessage());
-		} catch (IOException e) {
-			Output.err("IO Error reading from file " + path + ". " + e.getMessage());
-		} catch (ClassNotFoundException e) {
-			Output.err("Class not found error while reading from " + path + ". " + e.getMessage());
-		}
-		return null;
+	public static JSONObject readJSONFromFile(String path) {
+		return new JSONObject(readFromFile(path));
 	}
 
-	public static void writeObjectToFile(Object obj, String path) {
-		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path))) {
-			out.writeObject(obj);
-		} catch (FileNotFoundException e) {
-			Output.err("Error accesing file " + path + ". " + e.getMessage());
-		} catch (IOException e) {
-			Output.err("IO Error writing to file " + path + ". " + e.getMessage());
-		}
+	public static void writeJSONToFile(JSONObject json, String path) {
+		writeToFile(json.toString(4), path);
 	}
+
+	public static void writeToFile(JSONAble obj, String path) {
+		writeToFile(obj.toJSON().toString(4), path);
+	}
+
+	// public static Object readObjectFromFile(String path) {
+	// 	try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(path))) {
+	// 		return in.readObject();
+	// 	} catch (FileNotFoundException e) {
+	// 		Output.err("Error creating/accessing file " + path + ". " + e.getMessage());
+	// 	} catch (IOException e) {
+	// 		Output.err("IO Error reading from file " + path + ". " + e.getMessage());
+	// 	} catch (ClassNotFoundException e) {
+	// 		Output.err("Class not found error while reading from " + path + ". " + e.getMessage());
+	// 	}
+	// 	return null;
+	// }
+
+	// public static void writeObjectToFile(Object obj, String path) {
+	// 	try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path))) {
+	// 		out.writeObject(obj);
+	// 	} catch (FileNotFoundException e) {
+	// 		Output.err("Error accesing file " + path + ". " + e.getMessage());
+	// 	} catch (IOException e) {
+	// 		Output.err("IO Error writing to file " + path + ". " + e.getMessage());
+	// 	}
+	// }
 
 	public static String readFromWebpage(String url) {
 		System.out.println("querying " + url);
@@ -71,6 +86,15 @@ public class IO {
 			Output.err("IO Error reading from URL " + url + ". " + e.getMessage());
 		}
 		return out;
+	}
 
+	public static boolean fileExists(String path) {
+		File file = new File(path);
+		return file.exists() && !file.isDirectory();
+	}
+
+	public static boolean dirExists(String path) {
+		File file = new File(path);
+		return file.exists() && file.isDirectory();
 	}
 }

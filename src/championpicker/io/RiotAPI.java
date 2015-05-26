@@ -35,11 +35,12 @@ public class RiotAPI implements Serializable {
     // }
 
     private String createURL(String extension) {
-        if(extension.contains("?"))
+        if(extension.contains("?"))  //make better
             return "https://" + region + ".api.pvp.net/" + extension + "&api_key=" + apiKey;
         return "https://" + region + ".api.pvp.net/" + extension + "?api_key=" + apiKey;
     }
 
+    // rename to apicall
     private JSONObject fetchJSON(String extension) {
         long current = System.currentTimeMillis();
         if(current - lastFetch < rateLimit) {

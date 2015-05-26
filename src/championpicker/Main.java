@@ -47,24 +47,32 @@ public class Main{
 
 	public static void main(String[] args) {
 
-		RiotAPI api = new RiotAPI();
-		System.out.println(api.getChampList());
+		// RiotAPI api = new RiotAPI();
+		// System.out.println(api.getChampList());
 		
-		RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2");
-		if(new File("champ_list.ser").exists()) {
-			ChampList.master = (ChampList)IO.readObjectFromFile("champ_list.ser");
-		} else {
-			ChampList.master = api.fetchChampList();
-			IO.writeObjectToFile(ChampList.master, "champ_list.ser");
-		}
-		System.out.println(api.fetchGamesBFS(100, api.fetchSummoner("sam"), "RANKED_TEAM_3x3"));
+		// RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2");
+		// if(new File("champ_list.ser").exists()) {
+		// 	ChampList.master = (ChampList)IO.readObjectFromFile("champ_list.ser");
+		// } else {
+		// 	ChampList.master = api.fetchChampList();
+		// 	IO.writeObjectToFile(ChampList.master, "champ_list.ser");
+		// }
+		// System.out.println(api.fetchGamesBFS(100, api.fetchSummoner("sam"), "RANKED_TEAM_3x3"));
 		//System.out.println(api.getChampList());
 		//System.out.println(api.getSummoner("quikhead").getId());
 
-		// Champ ahri = new Champ("Ahri", 54);
-		// ahri.pickRate = new UncertainValue(.4, 20);
+		//Champ ahri = new Champ("Ahri", 54);
+		//ahri.pickRate = new UncertainValue(.4, 20);
 
-		// System.out.println(new JSONObject(ahri).toString(4));
+		//System.out.println(ahri.toJSON().toString(4));
+
+		//IO.writeToFile(ahri, "Ahri.json");
+
+		// Champ ahri = new Champ(IO.readJSONFromFile("Ahri.json"));
+		// System.out.println(ahri);
+		// System.out.println(ahri.getId());
+		// System.out.println(ahri.pickRate.getValue());
+		// System.out.println(ahri.pickRate.getExperiance());
 
 		// RiotAPI api = new RiotAPI(new JSONObject(IO.readFromFile("api.json")));
 		// System.out.println(api.fetchChampList());
@@ -76,6 +84,10 @@ public class Main{
 		// Champ annie = new Champ(1);
 		// System.out.println(annie);
 		//System.out.println(IO.readFromWebpage("https://google.com"));
+
+		// RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2");
+		// System.out.println(api.fetchChampList());
+		
 	}
 
 	/*public static void main(String[] args) {

@@ -5,8 +5,11 @@ import championpicker.uncertainty.UncertainValue;
 import java.util.Map;
 import java.util.HashMap;
 import java.io.Serializable;
+import championpicker.io.JSONAble;
 
-public class Champ implements Serializable {
+import org.json.JSONObject;
+
+public class Champ implements JSONAble {
 
     private String name;
     private int id;
@@ -20,9 +23,22 @@ public class Champ implements Serializable {
         //stats = new HashMap<String, Object>();
     }
 
+    public Champ(JSONObject json) {
+        name = json.getString("name");
+        id = json.getInt("id");
+        pickRate = new UncertainValue(json.getString("pickRate"));
+    }
+
     //public void addStat(String key, Object stat) {
     //    stats.put(key, stat);
     //}
+
+    public JSONObject toJSON() {
+        return new JSONObject()
+            .put("name", name)
+            .put("id", id)
+            .put("pickRate", pickRate.toString());
+    }
 
     public String getName() {
         return name;
