@@ -20,6 +20,8 @@ public class Champ implements JSONAble {
     public Champ(String name, int id) {
         this.name = name;
         this.id = id;
+        //maybbeee???
+        //pickRate = new UncertainValue(.5, 0);
         //stats = new HashMap<String, Object>();
     }
 

@@ -16,13 +16,14 @@ public class UncertainValue implements Serializable {
         this.experiance = experiance;
     }
 
-    public UncertainValue(String str) {
-        System.out.print(str + "  ");
-        if(str == null || str == "") return;
-        System.out.println(str);
-        value = Double.parseDouble(str.substring(0, str.indexOf(delim)));
-        experiance = Integer.parseInt(str.substring(str.indexOf(delim) + delim.length()));
-        assert toString().equals(str);
+    // public UncertainValue(String str) {
+    //     value = Double.parseDouble(str.substring(0, str.indexOf(delim)));
+    //     experiance = Integer.parseInt(str.substring(str.indexOf(delim) + delim.length()));
+    //     assert toString().equals(str);
+    // }
+
+    public static UncertainValue parse(String str) {
+        if()
     }
 
     // rename
