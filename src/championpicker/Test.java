@@ -27,7 +27,17 @@ public class Test {
 		// }
   //       System.out.println(api.fetchGamesBFS(100, api.fetchSummoner("sam"), "RANKED_TEAM_3x3"));
     
-    	System.out.println("hello world@#$%");
+    	//System.out.println("hello world@#$%");
+    	ChampList champs = new ChampList();
+    	Champ ahri = new Champ("Ahri", 10);
+    	Champ aatrox = new Champ("Aatrox", 11);
+    	champs.add(ahri);
+    	champs.add(aatrox);
+    	System.out.println(champs.toJSON().toString(4));
+    	IO.writeToFile(champs, "champs.json");
+
+    	ChampList fromFile = new ChampList(IO.readJSONFromFile("champs.json"));
+    	System.out.println(fromFile.toJSON().toString(4));
     }
 
     /*public static void main(String[] args) {

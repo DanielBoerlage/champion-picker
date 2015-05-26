@@ -26,7 +26,7 @@ public class Champ implements JSONAble {
     public Champ(JSONObject json) {
         name = json.getString("name");
         id = json.getInt("id");
-        pickRate = new UncertainValue(json.getString("pickRate"));
+        pickRate = new UncertainValue(json.optString("pickRate"));
     }
 
     //public void addStat(String key, Object stat) {
