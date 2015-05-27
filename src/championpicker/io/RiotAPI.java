@@ -118,7 +118,6 @@ public class RiotAPI implements Serializable, JSONAble {
                         continue;
                     }
                     System.out.printf("Found summoner ( new ): %-16s rank: %s\n", summonerName, rank);
-                    //System.out.println("Found summoner ( new ): " + summonerName + "rank: " + rank);
                     summoners.add(summonerId);
                 }
             }
@@ -137,9 +136,9 @@ public class RiotAPI implements Serializable, JSONAble {
     //     return games;
     // }
 
-    public Game fetchGame(long gameId) {
-        return new Game(apiCall(region + "/v2.2/match/" + gameId));
-    }
+    // public Game fetchGame(long gameId) {
+    //     return new Game(apiCall(region + "/v2.2/match/" + gameId));
+    // }
 
     public Summoner fetchSummoner(String name) {
         JSONObject summoner = apiCall(region + "/v1.4/summoner/by-name/" + name).getJSONObject(name.toLowerCase());

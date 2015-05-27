@@ -51,8 +51,8 @@ public class Test {
             IO.writeToFile(ChampList.master, "champ_list.json");
         }
 
-        IO.mkDir("sams_games_new");
-        api.fetchGamesBFS(1000, api.fetchSummoner("sam").getId(), "RANKED_TEAM_3x3", "sams_games_new");
+        // IO.mkDir("sams_games_new");
+        // api.fetchGamesBFS(1000, api.fetchSummoner("sam").getId(), "RANKED_TEAM_3x3", "sams_games_new");
 
         // long now = System.currentTimeMillis();
         // //
@@ -61,6 +61,7 @@ public class Test {
         //     System.out.println(game.getDateDiff(now)/(1000.0 * 60 * 60));
         // }
         //System.out.println(games);
+        GameList games = new GameList("sams_games");
     }
 
     /*public static void main(String[] args) {

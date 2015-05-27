@@ -2,6 +2,9 @@ package championpicker.champ;
 
 import java.util.ArrayList;
 
+import championpicker.uncertainty.UncertainValue;
+import champoinpicker.uncertainty.Tally;
+import championpicker.game.GameList;
 import championpicker.io.JSONAble;
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -36,5 +39,20 @@ public class ChampList extends ArrayList<Champ> implements JSONAble {
             if(champ.getId() == id)
                 return champ;
         return null;
+    }
+
+    public void compileStats(GameList corpus) {
+        //HashMap<Champ, Tally> wins;
+        HashMap<Champ, Tally> picks;
+        HashMap<Champ, Tally> bans;
+        for(Champ champ : this) {
+            picks.put(champ, new Tally());
+            bans.put(champ, new Tally());
+        }
+
+        for(Game game : corpus) {
+            
+        }
+
     }
 }

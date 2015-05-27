@@ -15,8 +15,12 @@ public class GameList extends ArrayList<Game> {
 	public GameList(String dir) {
 		super();
 		String[] files = new File(dir).list();
-		for(String file : files)
-			add(new Game(IO.readJSONFromFile(dir + "/" + file)));
+		for(String file : files) {
+			try {
+				add(new Game(IO.readJSONFromFile(dir + "/" + file)));
+			} catch(Exception e) { }
+		}
+		System.out.println(size());
 	}
 
 	public boolean containsId(long gameId) {

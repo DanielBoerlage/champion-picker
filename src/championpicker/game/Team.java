@@ -2,11 +2,23 @@ package championpicker.game;
 
 import championpicker.champ.Champ;
 
+import java.util.List;
 import java.util.ArrayList;
 
-public class Team extends ArrayList<Champ> {
+public class Team {
+
+    private List<Champ> picks, bans;
 
     public Team() {
-        super();
+        picks = new ArrayList<Champ>();
+        bans = new ArrayList<Champ>();
+    }
+
+    public void addPick(Champ champ) {
+        picks.add(champ);
+    }
+
+    public void addBan(Champ champ) {
+        bans.add(champ);
     }
 }
