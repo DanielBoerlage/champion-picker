@@ -4,11 +4,12 @@ import championpicker.champ.ChampList;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
-
+import java.util.Date;
 
 public class Game {
 
 	private long id;
+	private long date;
 	// Team0 is the blue team and always has first ban and first pick
 	private Team team0, team1;
 	private String winner;
@@ -19,6 +20,7 @@ public class Game {
 
 	public Game(JSONObject json) {
 		id = json.getLong("matchId");
+		date = json.getLong("matchCreation");
 		JSONArray participants = json.getJSONArray("participants");
 		int teamSize = participants.length() / 2;
 		team0 = new Team();
@@ -38,5 +40,10 @@ public class Game {
 
 	public String toString() {
 		return team0 + " vs " + team1;
+		//return String.valueOf(ge)
+	}
+
+	public long getDateDiff(long date) {
+		return date - this.date;
 	}
 }

@@ -4,6 +4,7 @@ import championpicker.champ.*;
 import championpicker.uncertainty.*;
 import championpicker.console.*;
 import championpicker.io.*;
+import championpicker.game.*;
 
 import java.io.File;
 import java.nio.file.*;
@@ -40,8 +41,26 @@ public class Test {
     	// System.out.println(fromFile.toJSON().toString(4));
 
         RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2", 1205);
-        IO.mkDir("sams_games");
-        api.fetchGamesBFS(30, api.fetchSummoner("sam").getId(), "RANKED_TEAM_3x3", "sams_games");
+        //IO.mkDir("sams_games");
+        //api.fetchGamesBFS(100, api.fetchSummoner("sam").getId(), "RANKED_TEAM_3x3", "sams_games");
+
+        if(IO.fileExists("champ_list.json")) {
+            ChampList.master = new ChampList(IO.readJSONFromFile("champ_list.json"));
+        } else {
+            ChampList.master = api.fetchChampList();
+            IO.writeToFile(ChampList.master, "champ_list.json");
+        }
+
+        // IO.mkDir("Scazzaf_games");
+        // api.fetchGamesBFS(1000, api.fetchSummoner("sam").getId(), "RANKED_TEAM_3x3", "sams_games");
+        //
+        long now = System.currentTimeMillis();
+        //
+        GameList games = new GameList("sams_games");
+        for (Game game : games) {
+            System.out.println(game.getDateDiff(now)/(1000.0 * 60 * 60));
+        }
+        //System.out.println(games);
     }
 
     /*public static void main(String[] args) {

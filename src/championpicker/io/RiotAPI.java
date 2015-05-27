@@ -138,7 +138,7 @@ public class RiotAPI implements Serializable, JSONAble {
     }
 
     public Summoner fetchSummoner(String name) {
-        JSONObject summoner = apiCall(region + "/v1.4/summoner/by-name/" + name).getJSONObject(name);
+        JSONObject summoner = apiCall(region + "/v1.4/summoner/by-name/" + name).getJSONObject(name.toLowerCase());
         return new Summoner(name, summoner.getLong("id"));
     }
 

@@ -16,7 +16,7 @@ public class GameList extends ArrayList<Game> {
 		super();
 		String[] files = new File(dir).list();
 		for(String file : files)
-			add(new Game(IO.readJSONFromFile(file)));
+			add(new Game(IO.readJSONFromFile(dir + "/" + file)));
 	}
 
 	public boolean containsId(long gameId) {
