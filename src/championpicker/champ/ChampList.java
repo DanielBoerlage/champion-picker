@@ -16,11 +16,6 @@ public class ChampList extends ArrayList<Champ> implements JSONAble {
     }
 
     public ChampList(JSONObject json) {
-        // super();
-        // JSONArray champs = json.getJSONArray("champs");
-        // for(int i = 0; i < champs.length(); i++)
-        //     add(new Champ(champs.getJSONObject(i)));
-        //
         super();
         Iterator<String> iter = json.keys();
         while(iter.hasNext()) {
@@ -30,11 +25,6 @@ public class ChampList extends ArrayList<Champ> implements JSONAble {
     }
 
     public JSONObject toJSON() {
-        // JSONArray champs = new JSONArray();
-        // for(Champ champ : this)
-        //     champs.put(champ.toJSON());
-        // return new JSONObject().put("champs", champs);
-
         JSONObject out = new JSONObject();
         for(Champ champ : this)
             out.put(champ.getName(), champ.toJSON());

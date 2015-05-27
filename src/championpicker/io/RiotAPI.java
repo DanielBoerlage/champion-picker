@@ -15,44 +15,58 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 import java.io.Serializable;
 
-public class RiotAPI implements Serializable {
+public class RiotAPI implements Serializable, JSONAble {
 
     private final String region, apiKey;
-    private final long rateLimit;
-    private transient long lastFetch;
+    private final long rateLimit; //recommended value: 1205
+    private long lastFetch;
 
-
-    public RiotAPI(String region, String apiKey) {
+    public RiotAPI(String region, String apiKey, long rateLimit) {
         this.region = region;
         this.apiKey = apiKey;
-        rateLimit = 1205;
+        this.rateLimit = rateLimit;
         lastFetch = 0;
     }
 
-    // public RiotAPI(JSONObject json) {
-    //     region = json.getString("region");
-    //     apiKey = json.getString("apiKey");
-    // }
-
-    private String createURL(String extension) {
-        if(extension.contains("?"))  //make better
-            return "https://" + region + ".api.pvp.net/" + extension + "&api_key=" + apiKey;
-        return "https://" + region + ".api.pvp.net/" + extension + "?api_key=" + apiKey;
+    public RiotAPI(JSONObject json) {
+        region = json.getString("region");
+        apiKey = json.getString("apiKey");
+        rateLimit = json.getLong("rateLimit");
+        lastFetch = 0;
     }
 
-    // rename to apicall
-    private JSONObject fetchJSON(String extension) {
+    public JSONObject toJSON() {
+        return new JSONObject()
+            .put("region", region)
+            .put("apiKey", apiKey)
+            .put("rateLimit", rateLimit);
+    }
+
+    private String createURL(String extension, String... params) {
+        // if(extension.contains("?"))  //make better
+        //     return "https://" + region + ".api.pvp.net/" + extension + "&api_key=" + apiKey;
+        // return "https://" + region + ".api.pvp.net/" + extension + "?api_key=" + apiKey;
+        if(params.length == 0)
+            return "https://" + region + ".api.pvp.net/api/lol/" + extension + "?api_key=" + apiKey;
+        String url = "https://" + region + ".api.pvp.net/api/lol/" + extension + "?";
+        for(String param : params)
+            url += param + "&";
+        return url + apiKey;
+    }
+
+    private JSONObject apiCall(String extension, String... params) {
         long current = System.currentTimeMillis();
         if(current - lastFetch < rateLimit) {
             try {
-                Thread.sleep(rateLimit - (current - lastFetch));
-                current = System.currentTimeMillis();
+                long sleepTime = rateLimit - (current - lastFetch);
+                Thread.sleep(sleepTime);
+                current += sleepTime;
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         lastFetch = current;
-        return new JSONObject(IO.readFromWebpage(createURL(extension)));
+        return new JSONObject(IO.readFromWebpage(createURL(extension, params)));
     }
 
     public ChampList fetchChampList() {

@@ -26,18 +26,24 @@ public class Test {
 		// 	IO.writeObjectToFile(ChampList.master, "champ_list.ser");
 		// }
   //       System.out.println(api.fetchGamesBFS(100, api.fetchSummoner("sam"), "RANKED_TEAM_3x3"));
-    
-    	//System.out.println("hello world@#$%");
-    	ChampList champs = new ChampList();
-    	Champ ahri = new Champ("Ahri", 10);
-    	Champ aatrox = new Champ("Aatrox", 11);
-    	champs.add(ahri);
-    	champs.add(aatrox);
-    	System.out.println(champs.toJSON().toString(4));
-    	IO.writeToFile(champs, "champs.json");
 
-    	ChampList fromFile = new ChampList(IO.readJSONFromFile("champs.json"));
-    	System.out.println(fromFile.toJSON().toString(4));
+    	//System.out.println("hello world@#$%");
+    	// ChampList champs = new ChampList();
+    	// Champ ahri = new Champ("Ahri", 10);
+    	// Champ aatrox = new Champ("Aatrox", 11);
+    	// champs.add(ahri);
+    	// champs.add(aatrox);
+    	// System.out.println(champs.toJSON().toString(4));
+    	// IO.writeToFile(champs, "champs.json");
+        //
+    	// ChampList fromFile = new ChampList(IO.readJSONFromFile("champs.json"));
+    	// System.out.println(fromFile.toJSON().toString(4));
+
+        RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2", 1205);
+        IO.writeToFile(api, "api.json");
+
+        RiotAPI newApi = new RiotAPI(IO.readJSONFromFile("api.json"));
+        System.out.println(newApi.fetchChampList());
     }
 
     /*public static void main(String[] args) {
