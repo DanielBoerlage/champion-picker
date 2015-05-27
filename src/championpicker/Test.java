@@ -40,10 +40,8 @@ public class Test {
     	// System.out.println(fromFile.toJSON().toString(4));
 
         RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2", 1205);
-        IO.writeToFile(api, "api.json");
-
-        RiotAPI newApi = new RiotAPI(IO.readJSONFromFile("api.json"));
-        System.out.println(newApi.fetchChampList());
+        IO.mkDir("sams_games");
+        api.fetchGamesBFS(30, api.fetchSummoner("sam").getId(), "RANKED_TEAM_3x3", "sams_games");
     }
 
     /*public static void main(String[] args) {

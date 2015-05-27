@@ -44,7 +44,7 @@ public class IO {
 		return new JSONObject(readFromFile(path));
 	}
 
-	public static void writeJSONToFile(JSONObject json, String path) {
+	public static void writeToFile(JSONObject json, String path) {
 		writeToFile(json.toString(4), path);
 	}
 
@@ -91,6 +91,10 @@ public class IO {
 	public static boolean fileExists(String path) {
 		File file = new File(path);
 		return file.exists() && !file.isDirectory();
+	}
+
+	public static boolean mkDir(String path) {
+		return new File(path).mkdirs();
 	}
 
 	public static boolean dirExists(String path) {
