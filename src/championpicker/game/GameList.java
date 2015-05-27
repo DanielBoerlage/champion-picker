@@ -20,7 +20,7 @@ public class GameList extends ArrayList<Game> {
 				add(new Game(IO.readJSONFromFile(dir + "/" + file)));
 			} catch(Exception e) { }
 		}
-		System.out.println(size());
+		//System.out.println(size());
 	}
 
 	public boolean containsId(long gameId) {

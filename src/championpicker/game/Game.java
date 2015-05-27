@@ -1,10 +1,14 @@
 package championpicker.game;
 
 import championpicker.champ.ChampList;
+import championpicker.champ.Champ;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
 import java.util.Date;
+
+import java.util.Set;
+import java.util.HashSet;
 
 public class Game {
 
@@ -45,6 +49,24 @@ public class Game {
 		team1.addBan(ChampList.master.byId(bans.getJSONObject(0).getInt("championId")));
 		team1.addBan(ChampList.master.byId(bans.getJSONObject(1).getInt("championId")));
 		team1.addBan(ChampList.master.byId(bans.getJSONObject(2).getInt("championId")));
+	}
+
+	public Set<Champ> allPicks() {
+		Set<Champ> out = new HashSet<Champ>();
+		out.addAll(team0.getPicks());
+		out.addAll(team1.getPicks());
+		return out;
+	}
+
+	public boolean champWon(Champ champ) {
+		return winner ^ team0.getPicks().contains(champ);
+	}
+
+	public Set<Champ> allBans() {
+		Set<Champ> out = new HashSet<Champ>();
+		out.addAll(team0.getBans());
+		out.addAll(team1.getBans());
+		return out;
 	}
 
 	public long getId() {

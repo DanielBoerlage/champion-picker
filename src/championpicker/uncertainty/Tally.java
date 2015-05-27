@@ -15,7 +15,12 @@ public class Tally {
     }
 
     public void addFalse() {
-        count++;
+        total++;
+    }
+
+    public void count(boolean truth) {
+        if (truth) count++;
+        total++;
     }
 
     public UncertainValue toUncertainValue() {

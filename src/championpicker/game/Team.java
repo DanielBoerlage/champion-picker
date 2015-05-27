@@ -21,4 +21,12 @@ public class Team {
     public void addBan(Champ champ) {
         bans.add(champ);
     }
+
+    public List<Champ> getPicks() {
+        return picks;
+    }
+
+    public List<Champ> getBans() {
+        return bans;
+    }
 }

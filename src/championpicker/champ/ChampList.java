@@ -3,12 +3,15 @@ package championpicker.champ;
 import java.util.ArrayList;
 
 import championpicker.uncertainty.UncertainValue;
-import champoinpicker.uncertainty.Tally;
+import championpicker.uncertainty.Tally;
 import championpicker.game.GameList;
+import championpicker.game.Game;
 import championpicker.io.JSONAble;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import java.util.Iterator;
+import java.util.Set;
+import java.util.HashMap;
 
 public class ChampList extends ArrayList<Champ> implements JSONAble {
 
@@ -43,16 +46,30 @@ public class ChampList extends ArrayList<Champ> implements JSONAble {
 
     public void compileStats(GameList corpus) {
         //HashMap<Champ, Tally> wins;
-        HashMap<Champ, Tally> picks;
-        HashMap<Champ, Tally> bans;
+        HashMap<Champ, Tally> picks = new HashMap<Champ, Tally>();
+        HashMap<Champ, Tally> bans = new HashMap<Champ, Tally>();
+        HashMap<Champ, Tally> wins = new HashMap<Champ, Tally>();
         for(Champ champ : this) {
             picks.put(champ, new Tally());
             bans.put(champ, new Tally());
+            wins.put(champ, new Tally());
         }
 
         for(Game game : corpus) {
-            
+            Set<Champ> gamePicks = game.allPicks();
+            Set<Champ> gameBans = game.allBans();
+            for(Champ champ : this) {
+                picks.get(champ).count(gamePicks.contains(champ));
+                if(gamePicks.contains(champ))
+                    wins.get(champ).count(game.champWon(champ));
+                bans.get(champ).count(gameBans.contains(champ));
+            }
         }
 
+        for (Champ champ : this) {
+            champ.setPickRate(picks.get(champ).toUncertainValue());
+            champ.setBanRate(bans.get(champ).toUncertainValue());
+            champ.setWinRate(wins.get(champ).toUncertainValue());
+        }
     }
 }

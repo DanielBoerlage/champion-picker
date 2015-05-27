@@ -62,6 +62,9 @@ public class Test {
         // }
         //System.out.println(games);
         GameList games = new GameList("sams_games");
+        ChampList.master.compileStats(games);
+        IO.writeToFile(ChampList.master, "champ_stats.json");
+        System.out.println(ChampList.master.toJSON().toString(4));
     }
 
     /*public static void main(String[] args) {
