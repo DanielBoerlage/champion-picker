@@ -14,21 +14,23 @@ public class Champ implements JSONAble {
     private String name;
     private int id;
     public UncertainValue pickRate;
+    public UncertainValue banRate;
 
     //private Map<String, Object> stats;
 
     public Champ(String name, int id) {
         this.name = name;
         this.id = id;
-        //maybbeee???
-        //pickRate = new UncertainValue(.5, 0);
+        pickRate = new UncertainValue(.5, 0);
+        banRate = new UncertainValue(.5, 0);
         //stats = new HashMap<String, Object>();
     }
 
-    public Champ(JSONObject json) {
-        name = json.getString("name");
+    public Champ(String name, JSONObject json) {
+        this.name = name;
         id = json.getInt("id");
-        pickRate = new UncertainValue(json.optString("pickRate"));
+        pickRate = new UncertainValue(json.getString("pickRate"));
+        banRate = new UncertainValue(json.getString("banRate"));
     }
 
     //public void addStat(String key, Object stat) {
@@ -37,9 +39,9 @@ public class Champ implements JSONAble {
 
     public JSONObject toJSON() {
         return new JSONObject()
-            .put("name", name)
             .put("id", id)
-            .put("pickRate", pickRate.toString());
+            .put("pickRate", pickRate.toString())
+            .put("banRate", banRate.toString());
     }
 
     public String getName() {
@@ -50,9 +52,9 @@ public class Champ implements JSONAble {
         return id;
     }
 
-    public String getPickRate() {
-        return pickRate.toString();
-    }
+    // public String getPickRate() {
+    //     return pickRate.toString();
+    // }
 
     public String toString() {
         return name;
