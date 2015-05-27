@@ -103,18 +103,22 @@ public class RiotAPI implements Serializable, JSONAble {
                 JSONObject gameData = apiCall(region + "/v2.2/match/" + gameId);
                 IO.writeToFile(gameData, dir + "/" + gameId + ".json");
                 games.add(gameId);
-                System.out.println("Found game ( new )");
+                long daysOld = (System.currentTimeMillis() - gameData.getLong("matchCreation")) / (1000 * 60 * 60 * 24);
+                System.out.println("Found game ( new )                        age: " + daysOld + " days old");
                 if (games.size() == n) return;
-                JSONArray participants = gameData.getJSONArray("participantIdentities");
+                JSONArray identities = gameData.getJSONArray("participantIdentities");
+                JSONArray participants = gameData.getJSONArray("participants");
                 for (int iPlayer = 0; iPlayer < participants.length(); iPlayer ++) {
-                    JSONObject player = participants.getJSONObject(iPlayer).getJSONObject("player");
+                    JSONObject player = identities.getJSONObject(iPlayer).getJSONObject("player");
                     long summonerId = player.getLong("summonerId");
                     String summonerName = player.getString("summonerName");
+                    String rank = participants.getJSONObject(iPlayer).getString("highestAchievedSeasonTier");
                     if (summoners.contains(summonerId)) {
                         System.out.println("Found summoner (stale): " + summonerName);
                         continue;
                     }
-                    System.out.println("Found summoner ( new ): " + summonerName);
+                    System.out.printf("Found summoner ( new ): %-16s rank: %s\n", summonerName, rank);
+                    //System.out.println("Found summoner ( new ): " + summonerName + "rank: " + rank);
                     summoners.add(summonerId);
                 }
             }
