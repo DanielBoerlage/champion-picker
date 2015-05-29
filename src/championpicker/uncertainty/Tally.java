@@ -26,4 +26,8 @@ public class Tally {
     public UncertainValue toUncertainValue() {
         return new UncertainValue(((double)count) / total, total);
     }
+
+    public double toDouble() {
+        return ((double)count) / total;
+    }
 }

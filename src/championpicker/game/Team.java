@@ -2,16 +2,16 @@ package championpicker.game;
 
 import championpicker.champ.Champ;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 public class Team {
 
-    private List<Champ> picks, bans;
+    private Set<Champ> picks, bans; // chnage to set
 
     public Team() {
-        picks = new ArrayList<Champ>();
-        bans = new ArrayList<Champ>();
+        picks = new HashSet<Champ>();
+        bans = new HashSet<Champ>();
     }
 
     public void addPick(Champ champ) {
@@ -22,11 +22,11 @@ public class Team {
         bans.add(champ);
     }
 
-    public List<Champ> getPicks() {
+    public Set<Champ> getPicks() {
         return picks;
     }
 
-    public List<Champ> getBans() {
+    public Set<Champ> getBans() {
         return bans;
     }
 }

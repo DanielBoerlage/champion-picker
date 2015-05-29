@@ -45,7 +45,6 @@ public class ChampList extends ArrayList<Champ> implements JSONAble {
     }
 
     public void compileStats(GameList corpus) {
-        //HashMap<Champ, Tally> wins;
         HashMap<Champ, Tally> picks = new HashMap<Champ, Tally>();
         HashMap<Champ, Tally> bans = new HashMap<Champ, Tally>();
         HashMap<Champ, Tally> wins = new HashMap<Champ, Tally>();

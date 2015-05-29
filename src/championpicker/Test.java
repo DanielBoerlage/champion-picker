@@ -61,10 +61,14 @@ public class Test {
         //     System.out.println(game.getDateDiff(now)/(1000.0 * 60 * 60));
         // }
         //System.out.println(games);
+        long start = System.currentTimeMillis();
         GameList games = new GameList("sams_games");
+        System.out.println(System.currentTimeMillis() - start);
         ChampList.master.compileStats(games);
+        System.out.println(System.currentTimeMillis() - start);
         IO.writeToFile(ChampList.master, "champ_stats.json");
-        System.out.println(ChampList.master.toJSON().toString(4));
+        //System.out.println(ChampList.master.toJSON().toString(4));
+        System.out.println(System.currentTimeMillis() - start);
     }
 
     /*public static void main(String[] args) {
