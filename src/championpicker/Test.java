@@ -18,7 +18,7 @@ import java.util.*;
 
 public class Test {
 
-    public static void test() {
+    public static void test(String[] args) {
   //       RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2");
   //       if(new File("champ_list.ser").exists()) {
 		// 	ChampList.master = (ChampList)IO.readObjectFromFile("champ_list.ser");

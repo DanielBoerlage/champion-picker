@@ -46,12 +46,12 @@ public class Main{
 	public static String message;
 
 	public static void main(String[] args) {
-		Test.test();
+		Test.test(args);
 	}
 
 		// RiotAPI api = new RiotAPI();
 		// System.out.println(api.getChampList());
-		
+
 
 	//public static void main(String[] args) {
 
@@ -96,7 +96,7 @@ public class Main{
 
 		// RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2");
 		// System.out.println(api.fetchChampList());
-		
+
 	//}
 		// RiotAPI api = new RiotAPI()
 		// System.out.println();

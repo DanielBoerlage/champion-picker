@@ -13,31 +13,31 @@ public class Champ implements JSONAble {
 
     private String name;
     private int id;
-    private UncertainValue pickRate;
-    private UncertainValue banRate;
+    private double         pickRate;
+    private double         banRate;
     private UncertainValue winRate;
 
     public Champ(String name, int id) {
         this.name = name;
         this.id = id;
-        pickRate = new UncertainValue(.5, 0);
-        banRate = new UncertainValue(.5, 0);
+        pickRate = .5;
+        banRate = .5;
         winRate = new UncertainValue(.5, 0);
     }
 
     public Champ(String name, JSONObject json) {
         this.name = name;
         id = json.getInt("id");
-        pickRate = new UncertainValue(json.getString("pickRate"));
-        banRate = new UncertainValue(json.getString("banRate"));
+        pickRate = json.getDouble("pickRate");
+        banRate = json.getDouble("bickRate");
         winRate = new UncertainValue(json.getString("winRate"));
     }
 
     public JSONObject toJSON() {
         return new JSONObject()
             .put("id", id)
-            .put("pickRate", pickRate.toString())
-            .put("banRate", banRate.toString())
+            .put("pickRate", pickRate)
+            .put("banRate", banRate)
             .put("winRate", winRate.toString());
     }
 
@@ -53,11 +53,11 @@ public class Champ implements JSONAble {
         return name;
     }
 
-    public void setPickRate(UncertainValue pickRate) {
+    public void setPickRate(double pickRate) {
         this.pickRate = pickRate;
     }
 
-    public void setBanRate(UncertainValue banRate) {
+    public void setBanRate(double banRate) {
         this.banRate = banRate;
     }
 

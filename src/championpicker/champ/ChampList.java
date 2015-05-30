@@ -66,8 +66,8 @@ public class ChampList extends ArrayList<Champ> implements JSONAble {
         }
 
         for (Champ champ : this) {
-            champ.setPickRate(picks.get(champ).toUncertainValue());
-            champ.setBanRate(bans.get(champ).toUncertainValue());
+            champ.setPickRate(picks.get(champ).toDouble());
+            champ.setBanRate(bans.get(champ).toDouble());
             champ.setWinRate(wins.get(champ).toUncertainValue());
         }
     }
