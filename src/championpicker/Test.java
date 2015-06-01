@@ -5,6 +5,8 @@ import championpicker.uncertainty.*;
 import championpicker.console.*;
 import championpicker.io.*;
 import championpicker.game.*;
+import championpicker.learn.*;
+import championpicker.util.*;
 
 import java.io.File;
 import java.nio.file.*;
@@ -61,14 +63,15 @@ public class Test {
         //     System.out.println(game.getDateDiff(now)/(1000.0 * 60 * 60));
         // }
         //System.out.println(games);
-        long start = System.currentTimeMillis();
-        GameList games = new GameList("sams_games");
-        System.out.println(System.currentTimeMillis() - start);
-        ChampList.master.compileStats(games);
-        System.out.println(System.currentTimeMillis() - start);
-        IO.writeToFile(ChampList.master, "champ_stats.json");
-        //System.out.println(ChampList.master.toJSON().toString(4));
-        System.out.println(System.currentTimeMillis() - start);
+        //GameList games = new GameList("sams_games");
+        //ChampList.master.compileStats(games);
+        //IO.writeToFile(ChampList.master, "champ_stats.json");
+
+        ChampList champStats = new ChampList(IO.readJSONFromFile("champ_stats.json"));
+        Weights weights = new Weights(-1, .2);
+        Map<Champ, Double> scores = Util.sortByValue(weights.calcScores(champStats));
+        for(Map.Entry<Champ, Double> entry : scores.entrySet())
+            System.out.printf("%-13s%f\n", entry.getKey(), entry.getValue());
     }
 
     /*public static void main(String[] args) {

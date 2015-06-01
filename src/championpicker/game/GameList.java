@@ -12,6 +12,7 @@ public class GameList extends ArrayList<Game> {
 	}
 
 	// create Game list from a directory of games in JSON format
+	// TODO: add status tracker
 	public GameList(String dir) {
 		super();
 		String[] files = new File(dir).list();

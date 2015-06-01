@@ -22,14 +22,12 @@ public class UncertainValue implements Serializable {
         assert toString().equals(str);
     }
 
-    // rename
-    public void translateValueToGoodBadFactorForm() {
-        value = value * 2 - 1;
-    }
-
-    // rename
     public double getBelief(double learningWeight) {
         return value * tanh(learningWeight * experiance);
+    }
+
+    public double getRateBelief(double learningWeight) {
+        return (2 * value - 1) * tanh(learningWeight * experiance);
     }
 
     public double getValue() {

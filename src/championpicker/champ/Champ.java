@@ -29,7 +29,7 @@ public class Champ implements JSONAble {
         this.name = name;
         id = json.getInt("id");
         pickRate = json.getDouble("pickRate");
-        banRate = json.getDouble("bickRate");
+        banRate = json.getDouble("banRate");
         winRate = new UncertainValue(json.getString("winRate"));
     }
 
@@ -63,5 +63,17 @@ public class Champ implements JSONAble {
 
     public void setWinRate(UncertainValue winRate) {
         this.winRate = winRate;
+    }
+
+    public double getPickRate() {
+        return pickRate;
+    }
+
+    public double getBanRate() {
+        return banRate;
+    }
+
+    public UncertainValue getWinRate() {
+        return winRate;
     }
 }
