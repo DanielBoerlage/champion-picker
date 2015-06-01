@@ -29,11 +29,9 @@ public class UncertainMap extends HashMap<Champ, UncertainValue> implements JSON
 
     public UncertainMap(JSONObject json) {
         super();
-        System.out.println("hi");
         Iterator<String> iter = json.keys();
         while(iter.hasNext()) {
             String name = iter.next();
-            System.out.println(json.getString(name));
             put(ChampList.master.byName(name), new UncertainValue(json.getString(name)));
         }
     }

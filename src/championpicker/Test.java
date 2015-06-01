@@ -74,7 +74,7 @@ public class Test {
         JSONObject json = IO.readJSONFromFile("champ_stats.json");
         ChampList champStats = new ChampList(json);
         champStats.setRelationals(json);
-        System.out.println(champStats.toJSON().toString(4));
+        //System.out.println(champStats.toJSON().toString(4));
         // Weights weights = new Weights(-.3, .2, 1, .05);
         // weights.compileChampList(champStats);
         // Map<Champ, Double> scores = Util.sortByValue(weights.calcScores(champStats));
