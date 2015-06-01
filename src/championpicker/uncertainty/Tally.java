@@ -24,10 +24,14 @@ public class Tally {
     }
 
     public UncertainValue toUncertainValue() {
+        if(total == 0)
+            return new UncertainValue(.5, 0);
         return new UncertainValue(((double)count) / total, total);
     }
 
     public double toDouble() {
+        if(total == 0)
+            return .5;
         return ((double)count) / total;
     }
 }

@@ -58,6 +58,17 @@ public class Game {
 		return out;
 	}
 
+	public Set<Champ> friendlies(Champ champ) {
+		Set<Champ> out = new HashSet<Champ>();
+		out.addAll(team0.getPicks().contains(champ) ? team0.getPicks() : team1.getPicks());
+		out.remove(champ);
+		return out;
+	}
+
+	public Set<Champ> enemies(Champ champ) {
+		return team0.getPicks().contains(champ) ? team0.getPicks() : team1.getPicks();
+	}
+
 	public boolean champWon(Champ champ) {
 		return winner ^ team0.getPicks().contains(champ);
 	}

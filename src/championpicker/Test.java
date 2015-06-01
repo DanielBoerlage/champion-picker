@@ -48,6 +48,7 @@ public class Test {
 
         if(IO.fileExists("champ_list.json")) {
             ChampList.master = new ChampList(IO.readJSONFromFile("champ_list.json"));
+            ChampList.master.initRelationals();
         } else {
             ChampList.master = api.fetchChampList();
             IO.writeToFile(ChampList.master, "champ_list.json");
@@ -63,17 +64,26 @@ public class Test {
         //     System.out.println(game.getDateDiff(now)/(1000.0 * 60 * 60));
         // }
         //System.out.println(games);
-        //GameList games = new GameList("sams_games");
-        //ChampList.master.compileStats(games);
-        //IO.writeToFile(ChampList.master, "champ_stats.json");
+        // long start = System.currentTimeMillis();
+        // GameList games = new GameList("sams_games");
+        // System.out.println(System.currentTimeMillis() - start);
+        // ChampList.master.compileStats(games);
+        // System.out.println(System.currentTimeMillis() - start);
+        // IO.writeToFile(ChampList.master, "champ_stats.json");
 
-        ChampList champStats = new ChampList(IO.readJSONFromFile("champ_stats.json"));
-        Weights weights = new Weights(-.3, .2, 1, .05);
-        weights.compileChampList(champStats);
-        Map<Champ, Double> scores = Util.sortByValue(weights.calcScores(champStats));
-        for(Map.Entry<Champ, Double> entry : scores.entrySet())
-            System.out.printf("%-13s%f %f %d\n", entry.getKey(), (entry.getValue()+1)/2, entry.getKey().getWinRate().getValue(),
-                entry.getKey().getWinRate().getExperiance());
+        JSONObject json = IO.readJSONFromFile("champ_stats.json");
+        ChampList champStats = new ChampList(json);
+        champStats.setRelationals(json);
+        System.out.println(champStats.toJSON().toString(4));
+        // Weights weights = new Weights(-.3, .2, 1, .05);
+        // weights.compileChampList(champStats);
+        // Map<Champ, Double> scores = Util.sortByValue(weights.calcScores(champStats));
+        // for(Map.Entry<Champ, Double> entry : scores.entrySet())
+        //     System.out.printf("%-13s%f %f %d\n", entry.getKey(), (entry.getValue()+1)/2, entry.getKey().getWinRate().getValue(),
+        //         entry.getKey().getWinRate().getExperiance());
+        // System.out.println(champStats.toJSON().toString(4));
+
+
     }
 
     /*public static void main(String[] args) {

@@ -1,6 +1,7 @@
 package championpicker.champ;
 
 import championpicker.uncertainty.UncertainValue;
+import championpicker.uncertainty.UncertainMap;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -16,6 +17,9 @@ public class Champ implements JSONAble {
     private double         pickRate;
     private double         banRate;
     private UncertainValue winRate;
+
+    private UncertainMap goodWith;
+    private UncertainMap goodAiganst;
 
     private double compiledWinRate;
 
@@ -40,7 +44,19 @@ public class Champ implements JSONAble {
             .put("id", id)
             .put("pickRate", pickRate)
             .put("banRate", banRate)
-            .put("winRate", winRate.toString());
+            .put("winRate", winRate.toString())
+            .put("goodWith", goodWith.toJSON())
+            .put("goodAiganst", goodAiganst.toJSON());
+    }
+
+    public void initRelationals(ChampList champs) {
+        goodWith = new UncertainMap(champs);
+        goodAiganst = new UncertainMap(champs);
+    }
+
+    public void setRelationals(JSONObject json) {
+        goodWith = new UncertainMap(json.getJSONObject("goodWith"));
+        goodAiganst = new UncertainMap(json.getJSONObject("goodAiganst"));
     }
 
     public void compile(double learningWeight) {
@@ -69,6 +85,14 @@ public class Champ implements JSONAble {
 
     public void setWinRate(UncertainValue winRate) {
         this.winRate = winRate;
+    }
+
+    public void setGoodWith(UncertainMap goodWith) {
+        this.goodWith = goodWith;
+    }
+
+    public void setGoodAiganst(UncertainMap goodAiganst) {
+        this.goodAiganst = goodAiganst;
     }
 
     public double getPickRate() {
