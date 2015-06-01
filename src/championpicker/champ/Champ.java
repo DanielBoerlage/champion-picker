@@ -17,6 +17,8 @@ public class Champ implements JSONAble {
     private double         banRate;
     private UncertainValue winRate;
 
+    private double compiledWinRate;
+
     public Champ(String name, int id) {
         this.name = name;
         this.id = id;
@@ -39,6 +41,10 @@ public class Champ implements JSONAble {
             .put("pickRate", pickRate)
             .put("banRate", banRate)
             .put("winRate", winRate.toString());
+    }
+
+    public void compile(double learningWeight) {
+        compiledWinRate = winRate.getRateBelief(learningWeight);
     }
 
     public String getName() {
@@ -75,5 +81,9 @@ public class Champ implements JSONAble {
 
     public UncertainValue getWinRate() {
         return winRate;
+    }
+
+    public double getCompiledWinRate() {
+        return compiledWinRate;
     }
 }

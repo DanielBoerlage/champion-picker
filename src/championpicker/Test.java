@@ -68,10 +68,12 @@ public class Test {
         //IO.writeToFile(ChampList.master, "champ_stats.json");
 
         ChampList champStats = new ChampList(IO.readJSONFromFile("champ_stats.json"));
-        Weights weights = new Weights(-1, .2);
+        Weights weights = new Weights(-.3, .2, 1, .05);
+        weights.compileChampList(champStats);
         Map<Champ, Double> scores = Util.sortByValue(weights.calcScores(champStats));
         for(Map.Entry<Champ, Double> entry : scores.entrySet())
-            System.out.printf("%-13s%f\n", entry.getKey(), entry.getValue());
+            System.out.printf("%-13s%f %f %d\n", entry.getKey(), (entry.getValue()+1)/2, entry.getKey().getWinRate().getValue(),
+                entry.getKey().getWinRate().getExperiance());
     }
 
     /*public static void main(String[] args) {

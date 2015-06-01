@@ -11,15 +11,23 @@ public class Weights {
 
     public double pickRate, banRate, winRate, learningWeight;
 
-    public Weights(double pickRate, double banRate) {
+    public Weights(double pickRate, double banRate, double winRate, double learningWeight) {
         this.pickRate = pickRate;
         this.banRate = banRate;
+        this.winRate = winRate;
+        this.learningWeight = learningWeight;
+    }
+
+    public void compileChampList(ChampList champs) {
+        for(Champ champ : champs)
+            champ.compile(learningWeight);
     }
 
     public double calcScore(Champ champ) {
         double sum = 0;
         sum += pickRate * champ.getPickRate();
         sum += banRate * champ.getBanRate();
+        sum += winRate * champ.getCompiledWinRate();
         return sum;
     }
 
@@ -29,13 +37,4 @@ public class Weights {
             out.put(champ, calcScore(champ));
         return out;
     }
-    //
-    // public List<ChampScore> calcScores(ChampList champs) {
-    //     List<ChampScore> out = new List<ChampScore>();
-    //     for(Champ champ : champs)
-    //         out.add(new ChampScore(champ, calcScore(champ)));
-    //     return
-    //
-    //     Map<Champ, Double>
-    // }
 }
