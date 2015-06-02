@@ -32,7 +32,7 @@ public class Weights {
         double localSum = 0;
         for(Champ friendly : context.getFriendlyTeam().getPicks())
             localSum += champ.getCompiledGoodWith().get(friendly);
-        sum += localSum;
+        sum += localSum * goodWith;
         return sum;
     }
 

@@ -71,11 +71,11 @@ public class Test {
         JSONObject json = IO.readJSONFromFile("champ_stats.json");
         ChampList champStats = new ChampList(json);
         champStats.setRelationals(json);
-        Weights weights = new Weights(0, 0, 0, 1, 0, .05);
+        Weights weights = new Weights(-.3, .1, .7, 1, 0, .05);
         weights.compileChampList(champStats);
         Context context = new Context();
-        //context.addFriendlyPick(ChampList.master.byName("Yasuo"));
-        context.addFriendlyPick(ChampList.master.byName("Zac"));
+        context.addFriendlyPick(ChampList.master.byName("Leona"));
+        context.addFriendlyPick(ChampList.master.byName("Ezreal"));
         Map<Champ, Double> scores = Util.sortByValue(weights.calcScores(champStats, context));
         int i = 0;
         for(Map.Entry<Champ, Double> entry : scores.entrySet()) {
