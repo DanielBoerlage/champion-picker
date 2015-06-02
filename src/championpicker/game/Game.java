@@ -66,7 +66,7 @@ public class Game {
 	}
 
 	public Set<Champ> enemies(Champ champ) {
-		return team0.getPicks().contains(champ) ? team0.getPicks() : team1.getPicks();
+		return team0.getPicks().contains(champ) ? team1.getPicks() : team0.getPicks();
 	}
 
 	public boolean champWon(Champ champ) {

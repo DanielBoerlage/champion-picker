@@ -20,7 +20,7 @@ import java.util.*;
 
 public class Test {
 
-    public static void test(String[] args) {
+    public static void test(String[] args) throws Exception {
   //       RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2");
   //       if(new File("champ_list.ser").exists()) {
 		// 	ChampList.master = (ChampList)IO.readObjectFromFile("champ_list.ser");
@@ -64,26 +64,26 @@ public class Test {
         //     System.out.println(game.getDateDiff(now)/(1000.0 * 60 * 60));
         // }
         //System.out.println(games);
-        // long start = System.currentTimeMillis();
         // GameList games = new GameList("sams_games");
-        // System.out.println(System.currentTimeMillis() - start);
         // ChampList.master.compileStats(games);
-        // System.out.println(System.currentTimeMillis() - start);
         // IO.writeToFile(ChampList.master, "champ_stats.json");
 
         JSONObject json = IO.readJSONFromFile("champ_stats.json");
         ChampList champStats = new ChampList(json);
         champStats.setRelationals(json);
-        //System.out.println(champStats.toJSON().toString(4));
-        // Weights weights = new Weights(-.3, .2, 1, .05);
-        // weights.compileChampList(champStats);
-        // Map<Champ, Double> scores = Util.sortByValue(weights.calcScores(champStats));
-        // for(Map.Entry<Champ, Double> entry : scores.entrySet())
-        //     System.out.printf("%-13s%f %f %d\n", entry.getKey(), (entry.getValue()+1)/2, entry.getKey().getWinRate().getValue(),
-        //         entry.getKey().getWinRate().getExperiance());
-        // System.out.println(champStats.toJSON().toString(4));
-
-
+        Weights weights = new Weights(0, 0, 0, 1, 0, .05);
+        weights.compileChampList(champStats);
+        Context context = new Context();
+        //context.addFriendlyPick(ChampList.master.byName("Yasuo"));
+        context.addFriendlyPick(ChampList.master.byName("Zac"));
+        Map<Champ, Double> scores = Util.sortByValue(weights.calcScores(champStats, context));
+        int i = 0;
+        for(Map.Entry<Champ, Double> entry : scores.entrySet()) {
+            if(i++ == 15) break;
+            System.out.printf("%-13s%f %f %d\n", entry.getKey(), entry.getValue(), entry.getKey().getWinRate().getValue(),
+                entry.getKey().getWinRate().getExperiance());
+        }
+        //System.out.println(champStats.byName("Ezreal").getCompiledGoodWith());
     }
 
     /*public static void main(String[] args) {

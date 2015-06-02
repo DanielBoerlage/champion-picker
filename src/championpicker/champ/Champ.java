@@ -21,7 +21,9 @@ public class Champ implements JSONAble {
     private UncertainMap goodWith;
     private UncertainMap goodAiganst;
 
-    private double compiledWinRate;
+    private double compiledStaticSum;
+    private Map<Champ, Double> compiledGoodWith;
+    private Map<Champ, Double> compiledGoodAiganst;
 
     public Champ(String name, int id) {
         this.name = name;
@@ -59,8 +61,18 @@ public class Champ implements JSONAble {
         goodAiganst = new UncertainMap(json.getJSONObject("goodAiganst"));
     }
 
-    public void compile(double learningWeight) {
-        compiledWinRate = winRate.getRateBelief(learningWeight);
+    public void compile(double pickRateWeight, double banRateWeight, double winRateWeight, double learningWeight) {
+        compiledStaticSum = 0;
+        compiledStaticSum += pickRateWeight * pickRate;
+        compiledStaticSum += banRateWeight * banRate;
+        compiledStaticSum += winRateWeight * winRate.getRateBelief(learningWeight);
+
+        compiledGoodWith = new HashMap<Champ, Double>();
+        for(Map.Entry<Champ, UncertainValue> entry : goodWith.entrySet())
+            compiledGoodWith.put(entry.getKey(), entry.getValue().getRateBelief(learningWeight));
+        compiledGoodAiganst = new HashMap<Champ, Double>();
+        for(Map.Entry<Champ, UncertainValue> entry : goodAiganst.entrySet())
+            compiledGoodAiganst.put(entry.getKey(), entry.getValue().getRateBelief(learningWeight));
     }
 
     public String getName() {
@@ -107,7 +119,15 @@ public class Champ implements JSONAble {
         return winRate;
     }
 
-    public double getCompiledWinRate() {
-        return compiledWinRate;
+    public double getCompiledStaticSum() {
+        return compiledStaticSum;
+    }
+
+    public Map<Champ, Double> getCompiledGoodWith() {
+        return compiledGoodWith;
+    }
+
+    public Map<Champ, Double> getCompiledGoodAiganst() {
+        return compiledGoodAiganst;
     }
 }
