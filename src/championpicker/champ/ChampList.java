@@ -101,12 +101,12 @@ public class ChampList extends ArrayList<Champ> implements JSONAble {
 
         }
 
-        for (Champ champ : this) {
-            champ.setPickRate(picks.get(champ).toDouble());
-            champ.setBanRate(bans.get(champ).toDouble());
-            champ.setWinRate(wins.get(champ).toUncertainValue());
-            champ.setGoodWith(new UncertainMap(goodWith.get(champ)));
-            champ.setGoodAiganst(new UncertainMap(goodAiganst.get(champ)));
-        }
+        // for (Champ champ : this) {
+        //     champ.setPickRate(picks.get(champ).toDouble());
+        //     champ.setBanRate(bans.get(champ).toDouble());
+        //     champ.setWinRate(wins.get(champ).toUncertainValue());
+        //     champ.setGoodWith(new UncertainMap(goodWith.get(champ)));
+        //     champ.setGoodAiganst(new UncertainMap(goodAiganst.get(champ)));
+        // }
     }
 }

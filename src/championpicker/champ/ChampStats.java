@@ -7,6 +7,8 @@
 //     private double         pickRate;
 //     private double         banRate;
 //     private UncertainValue winRate;
+//     private UncertainMap   goodWith;
+//     private UncertainMap   goodAgainst;
 //
 //     public ChampStats(double pickRate, double banRate, UncertainValue winRate) {
 //         this.pickRate = pickRate;

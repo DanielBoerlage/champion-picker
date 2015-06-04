@@ -86,7 +86,6 @@ public class Game {
 
 	public String toString() {
 		return team0 + " vs " + team1;
-		//return String.valueOf(ge)
 	}
 
 	public long getDateDiff(long date) {

@@ -20,7 +20,17 @@ import java.util.*;
 
 public class Test {
 
-    public static void test(String[] args) throws Exception {
+    public static void test(String[] args) {
+        // Object ref = new Object();
+        // Champ ez = new Champ("Ezreal", 1, ref);
+        // ChampStat ezStats = new ChampStat("Ezreal", 1, .5, .6, ref);
+        //
+        //
+        // List<Champ> champList;
+        // List<ChampStat> champStats;
+    }
+
+    /*public static void test(String[] args) throws Exception {
   //       RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2");
   //       if(new File("champ_list.ser").exists()) {
 		// 	ChampList.master = (ChampList)IO.readObjectFromFile("champ_list.ser");
@@ -84,7 +94,7 @@ public class Test {
                 entry.getKey().getWinRate().getExperiance());
         }
         //System.out.println(champStats.byName("Ezreal").getCompiledGoodWith());
-    }
+    }*/
 
     /*public static void main(String[] args) {
 		ChampList champs = new ChampList();

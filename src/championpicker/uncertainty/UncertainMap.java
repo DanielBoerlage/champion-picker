@@ -15,17 +15,17 @@ public class UncertainMap extends HashMap<Champ, UncertainValue> implements JSON
         super();
     }
 
-    public UncertainMap(Map<Champ, Tally> tallies) {
-        super();
-        for(Map.Entry<Champ, Tally> entry : tallies.entrySet())
-            put(entry.getKey(), entry.getValue().toUncertainValue());
-    }
+    // public UncertainMap(Map<Champ, Tally> tallies) {
+    //     super();
+    //     for(Map.Entry<Champ, Tally> entry : tallies.entrySet());
+    //         //put(entry.getKey(), entry.getValue().toUncertainValue());
+    // }
 
-    public UncertainMap(ChampList champs) {
-        super();
-        for(Champ champ : champs)
-            put(champ, new UncertainValue(.5, 0));
-    }
+    // public UncertainMap(ChampList champs) {
+    //     super();
+    //     for(Champ champ : champs)
+    //         put(champ, new UncertainValue(.5, 0));
+    // }
 
     public UncertainMap(JSONObject json) {
         super();
