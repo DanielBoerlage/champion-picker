@@ -8,7 +8,7 @@ import championpicker.game.*;
 import championpicker.learn.*;
 import championpicker.util.*;
 
-import championpicker.console.PasswordBox;
+import championpicker.console.mainStartUp;
 
 import java.io.File;
 import java.nio.file.*;
@@ -24,7 +24,7 @@ public class Test {
 
     public static void test(String[] args) {
 	
-		PassWord.createPasswordBox("Input login password");
+		mainStartUp.mainStartUp();
         // Object ref = new Object();
         // Champ ez = new Champ("Ezreal", 1, ref);
         // ChampStat ezStats = new ChampStat("Ezreal", 1, .5, .6, ref);

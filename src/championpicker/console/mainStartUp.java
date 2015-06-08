@@ -25,7 +25,7 @@ public class mainStartUp{
 	public Terminal term;
 	public Screen screen;
 	
-	public void mainStartUp(){
+	public static void mainStartUp(){
 	
 		Terminal term = TerminalFacade.createSwingTerminal();
 		
@@ -37,5 +37,10 @@ public class mainStartUp{
 		JFrame frame = ((SwingTerminal)term).getJFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Champion Picker");
+		
+		PassWord psswrd = new PassWord(testGUI, "Enter your personal password", 20);
+		
+		Thread p = new Thread(psswrd);
+		p.start();
 	}
 }
