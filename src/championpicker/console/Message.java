@@ -1,30 +1,27 @@
 package championpicker.console;
 
 import championpicker.Main;
-import com.googlecode.lanterna.gui.layout.LayoutParameter;
+import championpicker.console.mainMenu;
 
+import com.googlecode.lanterna.gui.layout.LayoutParameter;
 import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.Interactable;
-
 import com.googlecode.lanterna.gui.listener.WindowListener;
 import com.googlecode.lanterna.gui.Interactable;
-
 import com.googlecode.lanterna.gui.Window;
-import com.googlecode.lanterna.input.Key;
-
 import com.googlecode.lanterna.gui.*;
 import com.googlecode.lanterna.gui.component.Panel;
-
 import com.googlecode.lanterna.gui.component.Panel.Orientation;
 import com.googlecode.lanterna.gui.component.TextBox;
+import com.googlecode.lanterna.gui.component.Label;
+import com.googlecode.lanterna.gui.dialog.MessageBox;
+import com.googlecode.lanterna.gui.dialog.DialogButtons;
+
+import com.googlecode.lanterna.input.Key;
 
 import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.gui.component.Label;
 
 import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.gui.dialog.MessageBox;
-
-import com.googlecode.lanterna.gui.dialog.DialogButtons;
 
 public class Message extends MessageBox implements Runnable{//, WindowListener {
 
@@ -42,6 +39,7 @@ public class Message extends MessageBox implements Runnable{//, WindowListener {
 
 	public void run(){
 		parent.showWindow(this, GUIScreen.Position.CENTER);
+		mainMenu.displayMain();
 	}
 
 	/*public void onWindowClosed(Window window){
