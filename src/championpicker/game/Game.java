@@ -58,6 +58,17 @@ public class Game {
 		return out;
 	}
 
+	public Set<Champ> friendlies(Champ champ) {
+		Set<Champ> out = new HashSet<Champ>();
+		out.addAll(team0.getPicks().contains(champ) ? team0.getPicks() : team1.getPicks());
+		out.remove(champ);
+		return out;
+	}
+
+	public Set<Champ> enemies(Champ champ) {
+		return team0.getPicks().contains(champ) ? team1.getPicks() : team0.getPicks();
+	}
+
 	public boolean champWon(Champ champ) {
 		return winner ^ team0.getPicks().contains(champ);
 	}
@@ -75,7 +86,6 @@ public class Game {
 
 	public String toString() {
 		return team0 + " vs " + team1;
-		//return String.valueOf(ge)
 	}
 
 	public long getDateDiff(long date) {

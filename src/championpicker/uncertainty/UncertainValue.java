@@ -1,15 +1,17 @@
 package championpicker.uncertainty;
 
-import java.io.Serializable;
-
 import static java.lang.Math.tanh;
 
-public class UncertainValue implements Serializable {
+public class UncertainValue {
 
     private static final String delim = "?";
 
-    private double value;
-    private int experiance;
+    private double value, belief;
+    protected int experiance;
+
+    public UncertainValue() {
+        this(.5, 0);
+    }
 
     public UncertainValue(double value, int experiance) {
         this.value = value;
@@ -22,14 +24,20 @@ public class UncertainValue implements Serializable {
         assert toString().equals(str);
     }
 
-    // rename
-    public void translateValueToGoodBadFactorForm() {
-        value = value * 2 - 1;
+    public void compileBelief(double learningWeight) {
+        belief = getValue() * getConfidence(learningWeight);
     }
 
-    // rename
-    public double getBelief(double learningWeight) {
-        return value * tanh(learningWeight * experiance);
+    public void compileRateBelief(double learningWeight) {
+        belief = (2 * getValue() - 1) * getConfidence(learningWeight);
+    }
+
+    public double getConfidence(double learningWeight) {
+        return tanh(learningWeight * experiance);
+    }
+
+    public double getBelief() {
+        return belief;
     }
 
     public double getValue() {
@@ -41,6 +49,6 @@ public class UncertainValue implements Serializable {
     }
 
     public String toString() {
-        return value + delim + experiance;
+        return getValue() + delim + experiance;
     }
 }

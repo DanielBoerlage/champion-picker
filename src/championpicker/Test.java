@@ -5,6 +5,10 @@ import championpicker.uncertainty.*;
 import championpicker.console.*;
 import championpicker.io.*;
 import championpicker.game.*;
+import championpicker.learn.*;
+import championpicker.util.*;
+
+import championpicker.console.mainStartUp;
 
 import java.io.File;
 import java.nio.file.*;
@@ -19,11 +23,19 @@ import java.util.*;
 public class Test {
 
     public static void test(String[] args) {
-	
-		TerminalClass.createTerm();
-		
-	}
-	
+
+		mainStartUp.mainStartUp();
+        // Object ref = new Object();
+        // Champ ez = new Champ("Ezreal", 1, ref);
+        // ChampStat ezStats = new ChampStat("Ezreal", 1, .5, .6, ref);
+        //
+        //
+        // List<Champ> champList;
+        // List<ChampStat> champStats;
+    }
+
+    /*public static void test(String[] args) throws Exception {
+>>>>>>> 19bcabc3f3edb36ae8020967b292c30608cfa036
   //       RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2");
   //       if(new File("champ_list.ser").exists()) {
 		// 	ChampList.master = (ChampList)IO.readObjectFromFile("champ_list.ser");
@@ -51,6 +63,7 @@ public class Test {
 
         /*if(IO.fileExists("champ_list.json")) {
             ChampList.master = new ChampList(IO.readJSONFromFile("champ_list.json"));
+            ChampList.master.initRelationals();
         } else {
             ChampList.master = api.fetchChampList();
             IO.writeToFile(ChampList.master, "champ_list.json");
@@ -66,15 +79,27 @@ public class Test {
         //     System.out.println(game.getDateDiff(now)/(1000.0 * 60 * 60));
         // }
         //System.out.println(games);
-        long start = System.currentTimeMillis();
-        GameList games = new GameList("sams_games");
-        System.out.println(System.currentTimeMillis() - start);
-        ChampList.master.compileStats(games);
-        System.out.println(System.currentTimeMillis() - start);
-        IO.writeToFile(ChampList.master, "champ_stats.json");
-        //System.out.println(ChampList.master.toJSON().toString(4));
-        System.out.println(System.currentTimeMillis() - start);
-    }
+        // GameList games = new GameList("sams_games");
+        // ChampList.master.compileStats(games);
+        // IO.writeToFile(ChampList.master, "champ_stats.json");
+
+        JSONObject json = IO.readJSONFromFile("champ_stats.json");
+        ChampList champStats = new ChampList(json);
+        champStats.setRelationals(json);
+        Weights weights = new Weights(-.3, .1, .7, 1, 0, .05);
+        weights.compileChampList(champStats);
+        Context context = new Context();
+        context.addFriendlyPick(ChampList.master.byName("Leona"));
+        context.addFriendlyPick(ChampList.master.byName("Ezreal"));
+        Map<Champ, Double> scores = Util.sortByValue(weights.calcScores(champStats, context));
+        int i = 0;
+        for(Map.Entry<Champ, Double> entry : scores.entrySet()) {
+            if(i++ == 15) break;
+            System.out.printf("%-13s%f %f %d\n", entry.getKey(), entry.getValue(), entry.getKey().getWinRate().getValue(),
+                entry.getKey().getWinRate().getExperiance());
+        }
+        //System.out.println(champStats.byName("Ezreal").getCompiledGoodWith());
+    }*/
 
     /*public static void main(String[] args) {
 		ChampList champs = new ChampList();

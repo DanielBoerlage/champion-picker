@@ -7,7 +7,7 @@ import java.util.HashSet;
 
 public class Team {
 
-    private Set<Champ> picks, bans; // chnage to set
+    private Set<Champ> picks, bans;
 
     public Team() {
         picks = new HashSet<Champ>();

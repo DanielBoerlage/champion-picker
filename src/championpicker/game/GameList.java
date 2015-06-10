@@ -12,6 +12,7 @@ public class GameList extends ArrayList<Game> {
 	}
 
 	// create Game list from a directory of games in JSON format
+	// TODO: add status tracker
 	public GameList(String dir) {
 		super();
 		String[] files = new File(dir).list();
@@ -23,10 +24,10 @@ public class GameList extends ArrayList<Game> {
 		//System.out.println(size());
 	}
 
-	public boolean containsId(long gameId) {
-		for(Game game : this)
-			if(game.getId() == gameId)
-				return true;
-		return false;
-	}
+	// public boolean containsId(long gameId) {
+	// 	for(Game game : this)
+	// 		if(game.getId() == gameId)
+	// 			return true;
+	// 	return false;
+	// }
 }

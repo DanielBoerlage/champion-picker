@@ -82,6 +82,7 @@ public class RiotAPI implements Serializable, JSONAble {
             JSONObject champ = json.getJSONObject(iter.next());
             champs.add(new Champ(champ.getString("name"), champ.getInt("id")));
         }
+        champs.initRelationals();
         return champs;
     }
 
