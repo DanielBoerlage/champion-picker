@@ -26,15 +26,19 @@ import com.googlecode.lanterna.gui.dialog.MessageBox;
 
 import com.googlecode.lanterna.gui.dialog.DialogButtons;
 
-public class DialogWindow extends MessageBox implements Runnable{//, WindowListener {
+public class Message extends MessageBox implements Runnable{//, WindowListener {
 
 	GUIScreen parent;
 	
-	public DialogWindow(GUIScreen parent, String name, String message, DialogButtons buttons){
+	public Message(GUIScreen parent, String name, String message, DialogButtons buttons){
 	
 		super(name, message, buttons);
 		this.parent = parent;
 	}
+	
+	/*public void onClose(){
+		parent.update();
+	}*/
 
 	public void run(){
 		parent.showWindow(this, GUIScreen.Position.CENTER);

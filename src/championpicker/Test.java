@@ -19,6 +19,11 @@ import java.util.*;
 public class Test {
 
     public static void test(String[] args) {
+	
+		TerminalClass.createTerm();
+		
+	}
+	
   //       RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2");
   //       if(new File("champ_list.ser").exists()) {
 		// 	ChampList.master = (ChampList)IO.readObjectFromFile("champ_list.ser");
@@ -40,11 +45,11 @@ public class Test {
     	// ChampList fromFile = new ChampList(IO.readJSONFromFile("champs.json"));
     	// System.out.println(fromFile.toJSON().toString(4));
 
-        RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2", 1205);
+        //RiotAPI api = new RiotAPI("na", "11476299-1de7-4f9e-a5b1-9a9840fa3ea2", 1205);
         //IO.mkDir("sams_games");
         //api.fetchGamesBFS(100, api.fetchSummoner("sam").getId(), "RANKED_TEAM_3x3", "sams_games");
 
-        if(IO.fileExists("champ_list.json")) {
+        /*if(IO.fileExists("champ_list.json")) {
             ChampList.master = new ChampList(IO.readJSONFromFile("champ_list.json"));
         } else {
             ChampList.master = api.fetchChampList();

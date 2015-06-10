@@ -32,18 +32,15 @@ public class TerminalClass{
 		GUIScreen testGUI = new GUIScreen(screen);
 
 		//term.enterPrivateMode();
-		
-		Main.title = "Header";
-		Main.message = "Body";
 
-		DialogWindow helloWorld = new DialogWindow(testGUI, Main.title, Main.message, DialogButtons.OK);
+		Message helloWorld = new Message(testGUI, Main.title, Main.message, DialogButtons.OK_CANCEL);
 
 		JFrame frame = ((SwingTerminal)term).getJFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Champion Picker");
 		
 		Thread t = new Thread(helloWorld);
-		t.start();
+		//t.start();
 
 		/*try {
 			Thread.sleep(10000);
