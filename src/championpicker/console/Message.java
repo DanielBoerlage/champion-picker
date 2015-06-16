@@ -39,7 +39,7 @@ public class Message extends MessageBox implements Runnable{//, WindowListener {
 
 	public void run(){
 		parent.showWindow(this, GUIScreen.Position.CENTER);
-		mainMenu.displayMain();
+		System.out.println("Message run");
 	}
 
 	/*public void onWindowClosed(Window window){

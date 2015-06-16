@@ -22,22 +22,13 @@ import championpicker.console.mainStartUp;
 
 import javax.swing.JFrame;
 
-public class mainMenu implements Runnable{
+public class mainMenu extends Window implements Runnable{
 
-	static Window win;
-	
-	public static void displayMain(){	
-		win = new Window("Main Menu");
-		
-		win.addComponent(new Button("Champ select", new Action(){
-			@Override
-			public void doAction(){
-				//soloQ.chooseYourMap();
-			}
-		}));
-	}
+	public mainMenu(String name){
+		super(name);
+	}	
 	
 	public void run(){
-		win.getOwner().showWindow(win);
+		this.getOwner().showWindow(this);
 	}
 }
