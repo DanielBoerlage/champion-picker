@@ -40,6 +40,9 @@ public class Message extends MessageBox implements Runnable{//, WindowListener {
 	public void run(){
 		parent.showWindow(this, GUIScreen.Position.CENTER);
 		System.out.println("Message run");
+		
+		mainMenu menu = new mainMenu("Main Menu");
+		parent.showWindow(menu, GUIScreen.Position.CENTER);
 	}
 
 	/*public void onWindowClosed(Window window){

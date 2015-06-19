@@ -22,13 +22,17 @@ import championpicker.console.mainStartUp;
 
 import javax.swing.JFrame;
 
-public class mainMenu extends Window implements Runnable{
+public class mainMenu extends Window{
 
 	public mainMenu(String name){
-		super(name);
-	}	
 	
-	public void run(){
-		this.getOwner().showWindow(this);
-	}
+		super(name);
+		
+		addComponent(new Button("Queue!", new Action(){
+
+			public void doAction(){
+			System.out.println("Success!");
+			close();
+		}}));
+	}	
 }

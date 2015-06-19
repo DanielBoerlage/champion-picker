@@ -43,11 +43,5 @@ public class mainStartUp{
 		System.out.println("Create new thread");
 		Thread t = new Thread(helloWorld);
 		t.start();
-		
-		mainMenu menu = new mainMenu("Main Menu");
-		
-		System.out.println("Create new thread");
-		Thread y = new Thread(menu);
-		y.start();
 	}
 }
