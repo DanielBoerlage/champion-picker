@@ -19,24 +19,31 @@ import com.googlecode.lanterna.screen.Screen;
 
 import championpicker.Main;
 import championpicker.console.mainStartUp;
-import championpicker.console.queueWindow;
 
 import javax.swing.JFrame;
 
-public class mainMenu extends Window{
-
-	public mainMenu(String name){
+public class queueWindow extends Window{
 	
-		super(name);
+	public queueWindow(){
+		super("GLHF");
 		
-		queueWindow win = new queueWindow();
-		
-		addComponent(new Button("Queue!", new Action(){
+		createButtons(1);
+	}
+	
+	public void createButtons(int roundNum){
 
-			public void doAction(){
-			System.out.println("Success!");
-			
-			mainStartUp.gui.showWindow(win, GUIScreen.Position.CENTER);
+		addComponent(new Button("Us", new Action(){
+
+		public void doAction(){
+			System.out.println("Woohoo!");
+			//firstPick();
 		}}));
-	}	
+		
+		addComponent(new Button("Them", new Action(){
+
+		public void doAction(){
+			System.out.println("SWAAAAAAGGGGGGG!");
+			//secondPick();
+		}}));
+	}
 }
