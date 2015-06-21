@@ -6,7 +6,7 @@ public class UncertainValue {
 
     private static final String delim = "?";
 
-    private double value, belief;
+    private double value;
     protected int experiance;
 
     public UncertainValue() {
@@ -24,16 +24,8 @@ public class UncertainValue {
         assert toString().equals(str);
     }
 
-    public void compileBelief(double learningWeight, double average) {
-        belief = getValue() * getConfidence(learningWeight);
-    }
-
-    public double getConfidence(double learningWeight) {
-        return tanh(learningWeight * experiance);
-    }
-
-    public double getBelief() {
-        return belief;
+    public double getBelief(double learningWeight, double average) {
+        return (getValue() - average) * tanh(learningWeight * experiance));
     }
 
     public double getValue() {

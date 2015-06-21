@@ -24,6 +24,13 @@ public class ChampStats extends Champ {
         winRate = new UncertainValue(json.getString("winRate"));
     }
 
+    public ChampStats(GameList gameList) {
+        Tally pickTally = new Tally();
+        Tally banTally  = new Tally();
+        winRate = new Tally();
+        
+    }
+
     @Override
     public JSONObject toJSON() {
         return new JSONObject()
