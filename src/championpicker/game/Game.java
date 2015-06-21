@@ -14,23 +14,18 @@ public class Game {
 
 	private long id;
 	private long date;
-	// Team0 is the blue team and always has first ban and first pick
-	private Team team0, team1;
-	// true if team0 won
-	private boolean winner;
-
-	// public Game(int id, double weight) {
-	// 	this.id = id;
-	// }
+	private Team winner, loser;
+	private Set<Champ> picks;
+	private Set<Champ> bans;
 
 	public Game(JSONObject json) throws Exception {
 		id = json.getLong("matchId");
 		date = json.getLong("matchCreation");
 		JSONArray participants = json.getJSONArray("participants");
 		int teamSize = participants.length() / 2;
-		team0 = new Team();
-		team1 = new Team();
-		for(int i = 0; i < teamSize; i++) {
+		winner = new Team();
+		loser  = new Team();
+		for (int i = 0; i < teamSize; i++) {
 			JSONObject player = participants.getJSONObject(i);
 			team0.addPick(ChampList.master.byId(player.getInt("championId")));
 
@@ -51,11 +46,8 @@ public class Game {
 		team1.addBan(ChampList.master.byId(bans.getJSONObject(2).getInt("championId")));
 	}
 
-	public Set<Champ> allPicks() {
-		Set<Champ> out = new HashSet<Champ>();
-		out.addAll(team0.getPicks());
-		out.addAll(team1.getPicks());
-		return out;
+	public boolean containsPick(Champ champ) {
+		return picks.contains(champ);
 	}
 
 	public Set<Champ> friendlies(Champ champ) {

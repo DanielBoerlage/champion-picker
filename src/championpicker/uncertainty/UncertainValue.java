@@ -24,12 +24,8 @@ public class UncertainValue {
         assert toString().equals(str);
     }
 
-    public void compileBelief(double learningWeight) {
+    public void compileBelief(double learningWeight, double average) {
         belief = getValue() * getConfidence(learningWeight);
-    }
-
-    public void compileRateBelief(double learningWeight) {
-        belief = (2 * getValue() - 1) * getConfidence(learningWeight);
     }
 
     public double getConfidence(double learningWeight) {
