@@ -45,18 +45,6 @@ public class RiotAPI implements Serializable, JSONAble {
             .put("rateLimit", rateLimit);
     }
 
-    private String createURL(String extension, String... params) {
-        // if(extension.contains("?"))  //make better
-        //     return "https://" + region + ".api.pvp.net/" + extension + "&api_key=" + apiKey;
-        // return "https://" + region + ".api.pvp.net/" + extension + "?api_key=" + apiKey;
-        if(params.length == 0)
-            return "https://" + region + ".api.pvp.net/api/lol/" + extension + "?api_key=" + apiKey;
-        String url = "https://" + region + ".api.pvp.net/api/lol/" + extension + "?";
-        for(String param : params)
-            url += param + "&";
-        return url + "api_key=" + apiKey;
-    }
-
     private JSONObject apiCall(String extension, String... params) {
         long current = System.currentTimeMillis();//sleeptime calc here
         if(current - lastFetch < rateLimit) {
@@ -69,7 +57,12 @@ public class RiotAPI implements Serializable, JSONAble {
             }
         }
         lastFetch = current;
-        return new JSONObject(IO.readFromWebpage(createURL(extension, params)));
+
+        String url = "https://" + region + ".api.pvp.net/api/lol/" + extension + "?";
+        for(String param : params)
+            url += param + "&";
+        url += "api_key=" + apiKey;
+        return new JSONObject(IO.readFromWebpage(url));
     }
 
     //add api call for all the different riot api methods
