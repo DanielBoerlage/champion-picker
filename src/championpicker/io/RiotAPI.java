@@ -79,13 +79,14 @@ public class RiotAPI implements Serializable, JSONAble {
         return champs;
     }
 
-    public void fetchGamesBFS(int n, long root, String type, String dir) {
+    public void fetchGamesBFS(int n, long maxAge, int summThresh, long root, String type, String dir) {
         Set<Long> games = new HashSet<Long>();
+        int recentGames = 0;
         List<Long> summoners = new ArrayList<Long>();
         summoners.add(root);
         for (int iSumm = 0; iSumm < summoners.size(); iSumm++) {
             System.out.println("queue size: " + (summoners.size() - iSumm));
-            System.out.println("games size: " + games.size());
+            System.out.println("games size: " + recentGames);
             JSONArray matches = apiCall(region + "/v2.2/matchhistory/" + summoners.get(iSumm), "rankedQueues=" + type)
                                     .getJSONArray("matches");
             for (int iGame = 0; iGame < matches.length(); iGame++) {
@@ -95,11 +96,17 @@ public class RiotAPI implements Serializable, JSONAble {
                     continue;
                 }
                 JSONObject gameData = apiCall(region + "/v2.2/match/" + gameId);
-                IO.writeToFile(gameData, dir + "/" + gameId + ".json");
                 games.add(gameId);
                 long daysOld = (System.currentTimeMillis() - gameData.getLong("matchCreation")) / (1000 * 60 * 60 * 24);
-                System.out.println("Found game ( new )                        age: " + daysOld + " days old");
-                if (games.size() == n) return;
+                if(daysOld > maxAge) {
+                    System.out.println("Found game ( old )");
+                    if ((summoners.size() - iSumm) > summThresh) continue;
+                } else {
+                    System.out.println("Found game ( new )                        age: " + daysOld + " days old");
+                    IO.writeToFile(gameData, dir + "/" + gameId + ".json");
+                    recentGames++;
+                }
+                if (recentGames == n) return;
                 JSONArray identities = gameData.getJSONArray("participantIdentities");
                 JSONArray participants = gameData.getJSONArray("participants");
                 for (int iPlayer = 0; iPlayer < participants.length(); iPlayer ++) {
