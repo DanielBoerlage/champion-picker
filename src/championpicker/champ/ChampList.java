@@ -39,13 +39,13 @@ public class ChampList extends ArrayList<Champ> implements JSONAble {
     }
 
     public void initRelationals() {
-        for(Champ champ : this)
-            champ.initRelationals(this);
+        // for(Champ champ : this)
+        //     champ.initRelationals(this);
     }
 
     public void setRelationals(JSONObject json) {
-        for(Champ champ : this)
-            champ.setRelationals(json.getJSONObject(champ.getName()));
+        // for(Champ champ : this)
+        //     champ.setRelationals(json.getJSONObject(champ.getName()));
     }
 
     public Champ byId(int id) {
@@ -62,51 +62,51 @@ public class ChampList extends ArrayList<Champ> implements JSONAble {
         return null;
     }
 
-    public void compileStats(GameList corpus) {
-        HashMap<Champ, Tally> picks = new HashMap<Champ, Tally>();
-        HashMap<Champ, Tally> bans = new HashMap<Champ, Tally>();
-        HashMap<Champ, Tally> wins = new HashMap<Champ, Tally>();
-        HashMap<Champ, HashMap<Champ, Tally>> goodWith = new HashMap<Champ, HashMap<Champ, Tally>>();
-        HashMap<Champ, HashMap<Champ, Tally>> goodAiganst = new HashMap<Champ, HashMap<Champ, Tally>>();
-        for(Champ champ : this) {
-            picks.put(champ, new Tally());
-            bans.put(champ, new Tally());
-            wins.put(champ, new Tally());
-            HashMap<Champ, Tally> champGoodWith = new HashMap<Champ, Tally>();
-            HashMap<Champ, Tally> champGoodAiganst = new HashMap<Champ, Tally>();
-            for(Champ otherChamp : this) {
-                champGoodWith.put(otherChamp, new Tally());
-                champGoodAiganst.put(otherChamp, new Tally());
-            }
-            goodWith.put(champ, champGoodWith);
-            goodAiganst.put(champ, champGoodAiganst);
-        }
+    // public void compileStats(GameList corpus) {
+    //     HashMap<Champ, Tally> picks = new HashMap<Champ, Tally>();
+    //     HashMap<Champ, Tally> bans = new HashMap<Champ, Tally>();
+    //     HashMap<Champ, Tally> wins = new HashMap<Champ, Tally>();
+    //     HashMap<Champ, HashMap<Champ, Tally>> goodWith = new HashMap<Champ, HashMap<Champ, Tally>>();
+    //     HashMap<Champ, HashMap<Champ, Tally>> goodAiganst = new HashMap<Champ, HashMap<Champ, Tally>>();
+    //     for(Champ champ : this) {
+    //         picks.put(champ, new Tally());
+    //         bans.put(champ, new Tally());
+    //         wins.put(champ, new Tally());
+    //         HashMap<Champ, Tally> champGoodWith = new HashMap<Champ, Tally>();
+    //         HashMap<Champ, Tally> champGoodAiganst = new HashMap<Champ, Tally>();
+    //         for(Champ otherChamp : this) {
+    //             champGoodWith.put(otherChamp, new Tally());
+    //             champGoodAiganst.put(otherChamp, new Tally());
+    //         }
+    //         goodWith.put(champ, champGoodWith);
+    //         goodAiganst.put(champ, champGoodAiganst);
+    //     }
 
-        for(Game game : corpus) {
-            Set<Champ> gamePicks = game.allPicks();
-            Set<Champ> gameBans = game.allBans();
-            for(Champ champ : this) {
-                boolean inGame = gamePicks.contains(champ);
-                picks.get(champ).count(inGame);
-                if(inGame) {
-                    boolean won = game.champWon(champ);
-                    wins.get(champ).count(won);
-                    for(Champ friendly : game.friendlies(champ))
-                        goodWith.get(champ).get(friendly).count(won);
-                    for(Champ enemy : game.enemies(champ))
-                        goodAiganst.get(champ).get(enemy).count(won);
-                }
-                bans.get(champ).count(gameBans.contains(champ));
-            }
+    //     for(Game game : corpus) {
+    //         Set<Champ> gamePicks = game.allPicks();
+    //         Set<Champ> gameBans = game.allBans();
+    //         for(Champ champ : this) {
+    //             boolean inGame = gamePicks.contains(champ);
+    //             picks.get(champ).count(inGame);
+    //             if(inGame) {
+    //                 boolean won = game.champWon(champ);
+    //                 wins.get(champ).count(won);
+    //                 for(Champ friendly : game.friendlies(champ))
+    //                     goodWith.get(champ).get(friendly).count(won);
+    //                 for(Champ enemy : game.enemies(champ))
+    //                     goodAiganst.get(champ).get(enemy).count(won);
+    //             }
+    //             bans.get(champ).count(gameBans.contains(champ));
+    //         }
 
-        }
+    //     }
 
-        // for (Champ champ : this) {
-        //     champ.setPickRate(picks.get(champ).toDouble());
-        //     champ.setBanRate(bans.get(champ).toDouble());
-        //     champ.setWinRate(wins.get(champ).toUncertainValue());
-        //     champ.setGoodWith(new UncertainMap(goodWith.get(champ)));
-        //     champ.setGoodAiganst(new UncertainMap(goodAiganst.get(champ)));
-        // }
-    }
+    //     // for (Champ champ : this) {
+    //     //     champ.setPickRate(picks.get(champ).toDouble());
+    //     //     champ.setBanRate(bans.get(champ).toDouble());
+    //     //     champ.setWinRate(wins.get(champ).toUncertainValue());
+    //     //     champ.setGoodWith(new UncertainMap(goodWith.get(champ)));
+    //     //     champ.setGoodAiganst(new UncertainMap(goodAiganst.get(champ)));
+    //     // }
+    // }
 }

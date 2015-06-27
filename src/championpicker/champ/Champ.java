@@ -22,7 +22,7 @@ public class Champ implements JSONAble {
 
     public Champ(String name, JSONObject json) {
         this.name = name;
-        id = json.getLong("id");
+        id = json.getInt("id");
     }
 
     public JSONObject toJSON() {
@@ -42,7 +42,7 @@ public class Champ implements JSONAble {
         return name;
     }
 
-    public int hashCode() {
-        return name.hashCode();
-    }
+    // public int hashCode() {
+    //     return name.hashCode();
+    // }
 }

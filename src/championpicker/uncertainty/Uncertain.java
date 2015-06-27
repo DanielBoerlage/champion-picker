@@ -2,30 +2,26 @@ package championpicker.uncertainty;
 
 import static java.lang.Math.tanh;
 
-public class UncertainValue {
+public class Uncertain {
 
     private static final String delim = "?";
 
     private double value;
     protected int experiance;
 
-    public UncertainValue() {
-        this(.5, 0);
-    }
-
-    public UncertainValue(double value, int experiance) {
+    public Uncertain(double value, int experiance) {
         this.value = value;
         this.experiance = experiance;
     }
 
-    public UncertainValue(String str) {
+    public Uncertain(String str) {
         value = Double.parseDouble(str.substring(0, str.indexOf(delim)));
         experiance = Integer.parseInt(str.substring(str.indexOf(delim) + delim.length()));
         assert toString().equals(str);
     }
 
-    public double getBelief(double learningWeight, double average) {
-        return (getValue() - average) * tanh(learningWeight * experiance));
+    public double getBelief(double learningWeight, double standard) {
+        return (getValue() - standard) * tanh(learningWeight * experiance);
     }
 
     public double getValue() {

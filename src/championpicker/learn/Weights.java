@@ -22,17 +22,17 @@ public class Weights {
     }
 
     public void compileChampList(ChampList champs) {
-        for(Champ champ : champs)
-            champ.compile(pickRate, banRate, winRate, learningWeight);
+        // for(Champ champ : champs)
+        //     champ.compile(pickRate, banRate, winRate, learningWeight);
     }
 
     public double calcScore(Champ champ, Context context) {
         double sum = 0;
-        sum += champ.getCompiledStaticSum();
+        // sum += champ.getCompiledStaticSum();
         double localSum = 0;
-        for(Champ friendly : context.getFriendlyTeam().getPicks())
-            localSum += champ.getCompiledGoodWith().get(friendly);
-        sum += localSum * goodWith;
+        // for(Champ friendly : context.getFriendlyTeam().getPicks())
+            // localSum += champ.getCompiledGoodWith().get(friendly);
+        // sum += localSum * goodWith;
         return sum;
     }
 
