@@ -15,7 +15,7 @@ public class Util {
         Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
             @Override
             public int compare( Map.Entry<K, V> a, Map.Entry<K, V> b ) {
-                return b.getValue().compareTo(a.getValue());
+                return a.getValue().compareTo(b.getValue());
             }
         });
 

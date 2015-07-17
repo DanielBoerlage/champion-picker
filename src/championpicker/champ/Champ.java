@@ -1,6 +1,6 @@
 package championpicker.champ;
 
-import championpicker.uncertainty.UncertainValue;
+import championpicker.uncertainty.Uncertain;
 import championpicker.uncertainty.UncertainMap;
 
 import java.util.Map;

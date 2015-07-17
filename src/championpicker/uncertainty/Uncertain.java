@@ -17,7 +17,6 @@ public class Uncertain {
     public Uncertain(String str) {
         value = Double.parseDouble(str.substring(0, str.indexOf(delim)));
         experiance = Integer.parseInt(str.substring(str.indexOf(delim) + delim.length()));
-        assert toString().equals(str);
     }
 
     public double getBelief(double learningWeight, double standard) {

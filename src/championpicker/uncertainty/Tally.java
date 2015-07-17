@@ -1,10 +1,11 @@
 package championpicker.uncertainty;
 
-public class Tally extends UncertainValue {
+public class Tally extends Uncertain {
 
     private int count;
 
     public Tally() {
+        super(Double.NaN, 0);
         count = 0;
     }
 

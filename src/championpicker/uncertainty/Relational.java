@@ -12,12 +12,12 @@ public class Relational<T> extends HashMap<Champ, T> implements JSONAble {
         super();
     }
 
-    public Relational(ChampSet champs) {
-        super();
-        for(Champ champ : champs) {
-            put(champ, new T());
-        }
-    }
+    // public Relational(ChampSet champs) {
+    //     super();
+    //     for(Champ champ : champs) {
+    //         put(champ, new T());
+    //     }
+    // }
 
     // public Relational(JSONObject json, ChampSet champs) {
     //     super();

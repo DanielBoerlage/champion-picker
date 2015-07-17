@@ -2,7 +2,7 @@ package championpicker.champ;
 
 import java.util.ArrayList;
 
-import championpicker.uncertainty.UncertainValue;
+import championpicker.uncertainty.Uncertain;
 import championpicker.uncertainty.UncertainMap;
 import championpicker.uncertainty.Tally;
 import championpicker.game.GameList;

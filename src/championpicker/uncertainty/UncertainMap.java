@@ -9,7 +9,7 @@ import java.util.Map;
 import org.json.JSONObject;
 import java.util.Iterator;
 
-public class UncertainMap extends HashMap<Champ, UncertainValue> implements JSONAble {
+public class UncertainMap extends HashMap<Champ, Uncertain> implements JSONAble {
 
     public UncertainMap() {
         super();
@@ -32,13 +32,13 @@ public class UncertainMap extends HashMap<Champ, UncertainValue> implements JSON
         Iterator<String> iter = json.keys();
         while(iter.hasNext()) {
             String name = iter.next();
-            put(ChampList.master.byName(name), new UncertainValue(json.getString(name)));
+            put(ChampList.master.byName(name), new Uncertain(json.getString(name)));
         }
     }
 
     public JSONObject toJSON() {
         JSONObject out = new JSONObject();
-        for(Map.Entry<Champ, UncertainValue> entry : entrySet())
+        for(Map.Entry<Champ, Uncertain> entry : entrySet())
             out.put(entry.getKey().getName(), entry.getValue().toString());
         return out;
     }
