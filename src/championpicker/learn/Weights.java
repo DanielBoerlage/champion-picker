@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import championpicker.game.Context;
 import championpicker.champ.Champ;
-import championpicker.champ.ChampList;
 //import championpicker.champ.ChampScore;
 
 public class Weights {
@@ -21,10 +20,10 @@ public class Weights {
         this.learningWeight = learningWeight;
     }
 
-    public void compileChampList(ChampList champs) {
-        // for(Champ champ : champs)
-        //     champ.compile(pickRate, banRate, winRate, learningWeight);
-    }
+    // public void compileChampList(ChampList champs) {
+    //     // for(Champ champ : champs)
+    //     //     champ.compile(pickRate, banRate, winRate, learningWeight);
+    // }
 
     public double calcScore(Champ champ, Context context) {
         double sum = 0;
@@ -36,10 +35,10 @@ public class Weights {
         return sum;
     }
 
-    public Map<Champ, Double> calcScores(ChampList champs, Context context) {
-        Map<Champ, Double> out = new HashMap<Champ, Double>();
-        for(Champ champ : champs)
-            out.put(champ, calcScore(champ, context));
-        return out;
-    }
+    // public Map<Champ, Double> calcScores(ChampList champs, Context context) {
+    //     Map<Champ, Double> out = new HashMap<Champ, Double>();
+    //     for(Champ champ : champs)
+    //         out.put(champ, calcScore(champ, context));
+    //     return out;
+    // }
 }

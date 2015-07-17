@@ -6,10 +6,17 @@ import championpicker.champ.ChampSet;
 import championpicker.io.JSONAble;
 import org.json.JSONObject;
 
-public class Relational<T> extends HashMap<Champ, T> implements JSONAble {
+// Map<Champ, Uncertain>
+public class Relational implements JSONAble {
 
-    public Relational() {
-        super();
+    Uncertain[] values;
+
+    public Relational(ChampSet champs) {
+        values = new Uncertain[champs.size()];
+    }
+
+    public Uncertain getValue(Champ champ) {
+        return values[champ.getIndex()];
     }
 
     // public Relational(ChampSet champs) {

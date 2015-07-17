@@ -4,7 +4,6 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import championpicker.champ.Champ;
-import championpicker.champ.ChampList;
 import championpicker.summoner.Summoner;
 import championpicker.game.Game;
 import championpicker.game.GameList;
@@ -67,17 +66,17 @@ public class RiotAPI implements Serializable, JSONAble {
 
     //add api call for all the different riot api methods
 
-    public ChampList fetchChampList() {
-        ChampList champs = new ChampList();
-        JSONObject json = apiCall("static-data/" + region + "/v1.2/champion").getJSONObject("data");
-        Iterator<String> iter = json.keys();
-        while(iter.hasNext()) {
-            JSONObject champ = json.getJSONObject(iter.next());
-            champs.add(new Champ(champ.getString("name"), champ.getInt("id")));
-        }
-        champs.initRelationals();
-        return champs;
-    }
+    // public ChampList fetchChampList() {
+    //     ChampList champs = new ChampList();
+    //     JSONObject json = apiCall("static-data/" + region + "/v1.2/champion").getJSONObject("data");
+    //     Iterator<String> iter = json.keys();
+    //     while(iter.hasNext()) {
+    //         JSONObject champ = json.getJSONObject(iter.next());
+    //         // champs.add(new Champ(champ.getString("name"), );
+    //     }
+    //     champs.initRelationals();
+    //     return champs;
+    // }
 
     public void fetchGamesBFS(int n, long maxAge, int summThresh, long root, String type, String dir) {
         Set<Long> games = new HashSet<Long>();

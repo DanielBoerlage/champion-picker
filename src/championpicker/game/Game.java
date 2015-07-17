@@ -1,6 +1,5 @@
 package championpicker.game;
 
-import championpicker.champ.ChampList;
 import championpicker.champ.Champ;
 
 import org.json.JSONObject;

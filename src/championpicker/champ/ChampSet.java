@@ -4,11 +4,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import championpicker.io.JSONAble;
 import org.json.JSONObject;
+import org.json.JSONArray;
 
-public class ChampSet extends HashMap<String, Champ> implements Iterable<Champ> {
+public class ChampSet {
 
-    public ChampSet() {
-        super();
+    private Champ[] champs;
+    private int index;
+
+    public ChampSet(int size) {
+        champs = new Champ[size];
     }
 
     public ChampSet(JSONObject json) {
@@ -20,18 +24,37 @@ public class ChampSet extends HashMap<String, Champ> implements Iterable<Champ> 
         }
     }
 
-    public void add(Champ champ) {
-    	put(champ.getName(), champ);
+    public int add(Champ champ) {
+    	champs[index] = champ;
+        return index++;
+    }
+
+    public int size() {
+        return champs.length;
+    }
+
+    public JSONObject summary() {
+        JSONArray champArray = new JSONArray();
+        for(Champ champ : champs)
+            champArray.put(champ);
+        return new JSONObject()
+            .put("champs", champArray);
     }
 
     public JSONObject toJSON() {
     	JSONObject out = new JSONObject();
-    	for (Champ champ : this)
-    		out.put(champ.getName(), champ.toJSON());
+    	// for (Champ champ : this)
+    	// 	out.put(champ.getName(), champ.toJSON());
     	return out;
     }
 
-    public Iterator<Champ> iterator() {
-    	return values().iterator();
-    }
+    // public Iterator<Champ> iterator() {
+    // 	return new Iterator<Champ>(){
+    //         boolean hasNext() {
+
+    //         }
+
+
+    //     };
+    // }
 }
