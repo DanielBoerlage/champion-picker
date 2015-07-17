@@ -46,12 +46,13 @@ public class ChampSet extends ArrayList<Champ> {
         return json;
     }
 
-    public JSONObject toJSON() {
-    	JSONObject out = new JSONObject();
-    	// for (Champ champ : this)
-    	// 	out.put(champ.getName(), champ.toJSON());
-    	return out;
+    public JSONObject statisticalSummary() {
+        JSONObject json = new JSONObject();
+        for(Champ champ : this)
+            json.put(champ.getName(), champ.statsJSON());
+        return json;
     }
+
 
     // public Iterator<Champ> iterator() {
     // 	return new Iterator<Champ>(){

@@ -26,8 +26,11 @@ public class Test {
         RiotAPI api = new RiotAPI(IO.readJSONFromFile("api.json"));
         long quikhead = 33051878;
         long sam      = 22059070;
-        //ChampSet.master = new ChampSet(IO.readJSONFromFile("champs.json"));
+        ChampSet.master = new ChampSet(IO.readJSONFromFile("champs.json"));
         //api.fetchGamesBFS(100, 90, 30, sam, "RANKED_TEAM_3x3", "sams_games");
         GameSet games = new GameSet("sams_games");
+        for(Champ champ : ChampSet.master)
+            champ.compileStats(games);
+        IO.writeToFile(ChampSet.master.statisticalSummary(), "stats.json");
     }
 }

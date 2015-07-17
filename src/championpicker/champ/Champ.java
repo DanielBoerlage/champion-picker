@@ -24,7 +24,7 @@ public class Champ {
 
     private double pickRate;
     private double banRate;
-    private Uncertain winRate;
+    //private Uncertain winRate;
 
     private double compiledScore;
 
@@ -38,6 +38,13 @@ public class Champ {
         this.name = name;
         this.id = id;
         this.index = index;
+    }
+
+    public JSONObject statsJSON() {
+        JSONObject json = new JSONObject();
+        json.put("pickRate", pickRate);
+        json.put("banRate", banRate);
+        return json;
     }
 
     public void compileStats(GameSet games) {
