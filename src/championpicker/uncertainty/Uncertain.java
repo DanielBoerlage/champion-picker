@@ -2,7 +2,7 @@ package championpicker.uncertainty;
 
 import static java.lang.Math.tanh;
 
-public class Uncertain {
+public class Uncertain{
 
     private static final String delim = "?";
 

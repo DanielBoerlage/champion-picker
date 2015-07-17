@@ -9,7 +9,12 @@ import championpicker.champ.Champ;
 
 public class Weights {
 
-    public double pickRate, banRate, winRate, goodWith, goodAiganst, learningWeight;
+    public double pickRate,
+                  banRate,
+                  winRate,
+                  goodWith,
+                  goodAiganst,
+                  learningWeight;
 
     public Weights(double pickRate, double banRate, double winRate, double goodWith, double goodAiganst, double learningWeight) {
         this.pickRate = pickRate;
@@ -33,6 +38,14 @@ public class Weights {
             // localSum += champ.getCompiledGoodWith().get(friendly);
         // sum += localSum * goodWith;
         return sum;
+    }
+
+    public double getPickRate() {
+        return pickRate;
+    }
+
+    public double getBanRate() {
+        return banRate;
     }
 
     // public Map<Champ, Double> calcScores(ChampList champs, Context context) {

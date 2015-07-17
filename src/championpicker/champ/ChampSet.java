@@ -6,13 +6,14 @@ import championpicker.io.JSONAble;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-public class ChampSet {
+import java.util.ArrayList;
 
-    private Champ[] champs;
-    private int index;
+public class ChampSet extends ArrayList<Champ> {
 
-    public ChampSet(int size) {
-        champs = new Champ[size];
+    public static ChampSet master;
+
+    public ChampSet() {
+        super();
     }
 
     public ChampSet(JSONObject json) {
@@ -24,18 +25,23 @@ public class ChampSet {
         }
     }
 
-    public int add(Champ champ) {
-    	champs[index] = champ;
-        return index++;
+    public int append(Champ champ) {
+    	int ret = size();
+        super.add(champ);
+        return ret;
     }
 
-    public int size() {
-        return champs.length;
+    // maybe add table instead.. but need as many elemnts as champ id (may be too large)
+    public Champ byId(int id) {
+        for(Champ champ : this)
+            if(champ.getId() == id)
+                return champ;
+        return null;
     }
 
     public JSONObject summary() {
         JSONArray champArray = new JSONArray();
-        for(Champ champ : champs)
+        for(Champ champ : this)
             champArray.put(champ);
         return new JSONObject()
             .put("champs", champArray);

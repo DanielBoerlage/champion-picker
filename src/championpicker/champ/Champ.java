@@ -2,6 +2,12 @@ package championpicker.champ;
 
 import championpicker.uncertainty.Uncertain;
 import championpicker.uncertainty.Relational;
+import championpicker.uncertainty.Tally;
+
+import championpicker.game.Game;
+import championpicker.game.GameSet;
+import championpicker.learn.Weights;
+
 
 import java.util.Map;
 import java.util.HashMap;
@@ -13,17 +19,19 @@ import org.json.JSONObject;
 public class Champ {
 
     private String name;
+    private int id;
     private int index;
 
     private double pickRate;
     private double banRate;
     private Uncertain winRate;
-    private Relational goodWith;
-    private Relational goodAgainst;
 
-    public Champ(String name, ChampSet owner) {
+    private double compiledScore;
+
+    public Champ(String name, int id, ChampSet owner) {
         this.name = name;
-        index = owner.add(this);
+        this.id = id;
+        index = owner.append(this);
     }
 
     public Champ(String name, JSONObject json) {
@@ -31,9 +39,26 @@ public class Champ {
         index = json.getInt("id");
     }
 
-    // public JSONObject summary() {
-    //     return new JSONObject(
-    // }
+    public void compileStats(GameSet games) {
+        Tally pickRateTally = new Tally();
+        Tally banRateTally = new Tally();
+        for(Game game : games) {
+            pickRateTally.count(game.containsPick(this));
+            banRateTally.count(game.containsBan(this));
+        }
+        pickRate = pickRateTally.getValue();
+        banRate = banRateTally.getValue();
+    }
+
+    public void compilePartialScore(Weights weights) {
+        compiledScore = pickRate * weights.getPickRate();
+        compiledScore += banRate * weights.getBanRate();
+        //compiledSum += winRate
+    }
+
+    public double calculateScore(Weights weights) { //, Context context
+        return compiledScore;
+    }
 
     // public JSONObject toJSON() {
     //     return new JSONObject()
@@ -46,6 +71,10 @@ public class Champ {
 
     public int getIndex() {
         return index;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String toString() {

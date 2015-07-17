@@ -1,12 +1,11 @@
 package championpicker.uncertainty;
 
-public class Tally extends Uncertain {
+public class Tally {
 
-    private int count;
+    private int count, experiance;
 
     public Tally() {
-        super(Double.NaN, 0);
-        count = 0;
+        count = experiance = 0;
     }
 
     public void count(boolean truth) {
@@ -14,7 +13,10 @@ public class Tally extends Uncertain {
         experiance++;
     }
 
-    @Override
+    public Uncertain compile() {
+        return new Uncertain(getValue(), experiance);
+    }
+
     public double getValue() {
         return (double)count / experiance;
     }
