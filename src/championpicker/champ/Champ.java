@@ -34,9 +34,10 @@ public class Champ {
         index = owner.append(this);
     }
 
-    public Champ(String name, JSONObject json) {
+    public Champ(String name, int id, int index) {
         this.name = name;
-        index = json.getInt("id");
+        this.id = id;
+        this.index = index;
     }
 
     public void compileStats(GameSet games) {

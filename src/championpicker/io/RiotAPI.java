@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import championpicker.champ.Champ;
+import championpicker.champ.ChampSet;
 import championpicker.summoner.Summoner;
 import championpicker.game.Game;
 import championpicker.game.GameList;
@@ -66,17 +67,16 @@ public class RiotAPI implements Serializable, JSONAble {
 
     //add api call for all the different riot api methods
 
-    // public ChampList fetchChampList() {
-    //     ChampList champs = new ChampList();
-    //     JSONObject json = apiCall("static-data/" + region + "/v1.2/champion").getJSONObject("data");
-    //     Iterator<String> iter = json.keys();
-    //     while(iter.hasNext()) {
-    //         JSONObject champ = json.getJSONObject(iter.next());
-    //         // champs.add(new Champ(champ.getString("name"), );
-    //     }
-    //     champs.initRelationals();
-    //     return champs;
-    // }
+    public ChampSet fetchChampSet() {
+        ChampSet champs = new ChampSet();
+        JSONObject json = apiCall("static-data/" + region + "/v1.2/champion").getJSONObject("data");
+        Iterator<String> iter = json.keys();
+        while(iter.hasNext()) {
+            JSONObject champ = json.getJSONObject(iter.next());
+            champs.add(new Champ(champ.getString("name"), champ.getInt("id"), champs));
+        }
+        return champs;
+    }
 
     public void fetchGamesBFS(int n, long maxAge, int summThresh, long root, String type, String dir) {
         Set<Long> games = new HashSet<Long>();
@@ -88,7 +88,7 @@ public class RiotAPI implements Serializable, JSONAble {
             System.out.println("games size: " + recentGames);
             JSONArray matches = apiCall(region + "/v2.2/matchhistory/" + summoners.get(iSumm), "rankedQueues=" + type)
                                     .getJSONArray("matches");
-            for (int iGame = 0; iGame < matches.length(); iGame++) {
+            for (int iGame = matches.length()-1; iGame > 0; iGame--) {
                 long gameId = matches.getJSONObject(iGame).getLong("matchId");
                 if (games.contains(gameId)) {
                     System.out.println("Found game (stale)");
@@ -99,7 +99,7 @@ public class RiotAPI implements Serializable, JSONAble {
                 long daysOld = (System.currentTimeMillis() - gameData.getLong("matchCreation")) / (1000 * 60 * 60 * 24);
                 if(daysOld > maxAge) {
                     System.out.println("Found game ( old )");
-                    if ((summoners.size() - iSumm) > summThresh) continue;
+                    if ((summoners.size() - iSumm) > summThresh) break;
                 } else {
                     System.out.println("Found game ( new )                        age: " + daysOld + " days old");
                     IO.writeToFile(gameData, dir + "/" + gameId + ".json");

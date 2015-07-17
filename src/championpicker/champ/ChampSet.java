@@ -21,7 +21,7 @@ public class ChampSet extends ArrayList<Champ> {
     	Iterator<String> iter = json.keys();
         while(iter.hasNext()) {
             String name = iter.next();
-            add(new Champ(name, json.getJSONObject(name)));
+            add(new Champ(name, json.getInt(name), size()));
         }
     }
 
@@ -40,11 +40,10 @@ public class ChampSet extends ArrayList<Champ> {
     }
 
     public JSONObject summary() {
-        JSONArray champArray = new JSONArray();
+        JSONObject json = new JSONObject();
         for(Champ champ : this)
-            champArray.put(champ);
-        return new JSONObject()
-            .put("champs", champArray);
+            json.put(champ.getName(), champ.getId());
+        return json;
     }
 
     public JSONObject toJSON() {
