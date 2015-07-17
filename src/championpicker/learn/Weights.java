@@ -10,19 +10,24 @@ import championpicker.champ.Champ;
 public class Weights {
 
     public double pickRate,
-                  banRate,
-                  winRate,
-                  goodWith,
-                  goodAiganst,
-                  learningWeight;
+                  banRate;
+                  // winRate,
+                  // goodWith,
+                  // goodAiganst,
+                  // learningWeight;
 
-    public Weights(double pickRate, double banRate, double winRate, double goodWith, double goodAiganst, double learningWeight) {
+    // public Weights(double pickRate, double banRate, double winRate, double goodWith, double goodAiganst, double learningWeight) {
+    //     this.pickRate = pickRate;
+    //     this.banRate = banRate;
+    //     this.winRate = winRate;
+    //     this.goodWith = goodWith;
+    //     this.goodAiganst = goodAiganst;
+    //     this.learningWeight = learningWeight;
+    // }
+
+    public Weights(double pickRate, double banRate) {
         this.pickRate = pickRate;
         this.banRate = banRate;
-        this.winRate = winRate;
-        this.goodWith = goodWith;
-        this.goodAiganst = goodAiganst;
-        this.learningWeight = learningWeight;
     }
 
     // public void compileChampList(ChampList champs) {
@@ -30,15 +35,15 @@ public class Weights {
     //     //     champ.compile(pickRate, banRate, winRate, learningWeight);
     // }
 
-    public double calcScore(Champ champ, Context context) {
-        double sum = 0;
-        // sum += champ.getCompiledStaticSum();
-        double localSum = 0;
-        // for(Champ friendly : context.getFriendlyTeam().getPicks())
-            // localSum += champ.getCompiledGoodWith().get(friendly);
-        // sum += localSum * goodWith;
-        return sum;
-    }
+    // public double calcScore(Champ champ, Context context) {
+    //     double sum = 0;
+    //     // sum += champ.getCompiledStaticSum();
+    //     double localSum = 0;
+    //     // for(Champ friendly : context.getFriendlyTeam().getPicks())
+    //         // localSum += champ.getCompiledGoodWith().get(friendly);
+    //     // sum += localSum * goodWith;
+    //     return sum;
+    // }
 
     public double getPickRate() {
         return pickRate;

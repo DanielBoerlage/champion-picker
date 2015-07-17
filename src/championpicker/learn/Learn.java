@@ -11,6 +11,7 @@ public class Learn {
         this.corpus = corpus;
     }
 
+    // prediction is closest to reality
     public double fitness(Weights weights, Game game) {
         return 0;
     }

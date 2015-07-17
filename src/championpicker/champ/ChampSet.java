@@ -1,5 +1,8 @@
 package championpicker.champ;
 
+import championpicker.learn.Weights;
+import championpicker.game.GameSet;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import championpicker.io.JSONAble;
@@ -25,13 +28,18 @@ public class ChampSet extends ArrayList<Champ> {
         }
     }
 
+    public void readStats(JSONObject json) {
+        for(Champ champ : this)
+            champ.readStats(json.getJSONObject(champ.getName()));
+    }
+
     public int append(Champ champ) {
     	int ret = size();
         super.add(champ);
         return ret;
     }
 
-    // maybe add table instead.. but need as many elemnts as champ id (may be too large)
+    // maybe add table instead.. but need as many elemnts as champ id (may be too large) 1000max..toolazy
     public Champ byId(int id) {
         for(Champ champ : this)
             if(champ.getId() == id)
@@ -53,6 +61,20 @@ public class ChampSet extends ArrayList<Champ> {
         return json;
     }
 
+    public void compileStats(GameSet games) {
+        for(Champ champ : this)
+            champ.compileStats(games);
+    }
+
+    public void compilePartialScore(Weights weights) {
+        for(Champ champ : this)
+            champ.compilePartialScore(weights);
+    }
+
+    public void compileScore(Weights weights) {
+        for(Champ champ : this)
+            champ.compileScore(weights);
+    }
 
     // public Iterator<Champ> iterator() {
     // 	return new Iterator<Champ>(){

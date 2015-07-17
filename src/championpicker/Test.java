@@ -28,9 +28,13 @@ public class Test {
         long sam      = 22059070;
         ChampSet.master = new ChampSet(IO.readJSONFromFile("champs.json"));
         //api.fetchGamesBFS(100, 90, 30, sam, "RANKED_TEAM_3x3", "sams_games");
-        GameSet games = new GameSet("sams_games");
-        for(Champ champ : ChampSet.master)
-            champ.compileStats(games);
-        IO.writeToFile(ChampSet.master.statisticalSummary(), "stats.json");
+        // GameSet games = new GameSet("sams_games");
+        // for(Champ champ : ChampSet.master)
+        //     champ.compileStats(games);
+        // IO.writeToFile(ChampSet.master.statisticalSummary(), "stats.json");
+        ChampSet.master.readStats(IO.readJSONFromFile("stats.json"));
+        Weights weights = new Weights(-1, .3);
+        ChampSet.master.compilePartialScore(weights);
+        ChampSet.master.compileScore(weights);
     }
 }
