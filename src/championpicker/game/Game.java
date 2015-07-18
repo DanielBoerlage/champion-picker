@@ -14,15 +14,16 @@ public class Game {
 
 	private long id;
 	private long date;
-	private Team winner, loser;
+	private boolean winner;
+	private Team team0, team1;
 
 	public Game(JSONObject json) throws Exception {
 		id = json.getLong("matchId");
 		date = json.getLong("matchCreation");
 		JSONArray participants = json.getJSONArray("participants");
 		int teamSize = participants.length() / 2;
-		Team team0 = new Team();
-		Team team1 = new Team();
+		team0 = new Team(true);
+		team1 = new Team(false);
 		for (int i = 0; i < teamSize; i++) {
 			JSONObject player = participants.getJSONObject(i);
 			team0.addPick(ChampSet.master.byId(player.getInt("championId")));
@@ -32,6 +33,7 @@ public class Game {
 		}
 		JSONArray teams = json.getJSONArray("teams");
 		JSONObject team = teams.getJSONObject(0);
+		winner = team.getBoolean("winner");
 		JSONArray bans = team.getJSONArray("bans");
 		team0.addBan(ChampSet.master.byId(bans.getJSONObject(0).getInt("championId")));
 		team0.addBan(ChampSet.master.byId(bans.getJSONObject(1).getInt("championId")));
@@ -41,34 +43,32 @@ public class Game {
 		team1.addBan(ChampSet.master.byId(bans.getJSONObject(0).getInt("championId")));
 		team1.addBan(ChampSet.master.byId(bans.getJSONObject(1).getInt("championId")));
 		team1.addBan(ChampSet.master.byId(bans.getJSONObject(2).getInt("championId")));
-
-		boolean team0won = teams.getJSONObject(0).getBoolean("winner");
-		winner = team0won ? team0 : team1;
-		loser = team0won ? team1 : team0;
 	}
 
 	public boolean containsPick(Champ champ) {
-		return winner.getPicks().contains(champ) || loser.getPicks().contains(champ);
+		return team0.getPicks().contains(champ) || team1.getPicks().contains(champ);
 	}
 
 	public boolean containsBan(Champ champ) {
-		return winner.getBans().contains(champ) || loser.getBans().contains(champ);
+		return team0.getBans().contains(champ) || team1.getBans().contains(champ);
 	}
 
-	// public Set<Champ> friendlies(Champ champ) {
-	// 	Set<Champ> out = new HashSet<Champ>();
-	// 	out.addAll(team0.getPicks().contains(champ) ? team0.getPicks() : team1.getPicks());
-	// 	out.remove(champ);
-	// 	return out;
-	// }
+	public Set<Champ> friendlies(Champ champ) {
+		Set<Champ> out = new HashSet<Champ>(); //just make list
+		out.addAll(team0.getPicks().contains(champ) ? team0.getPicks() : team1.getPicks());
+		out.remove(champ);
+		return out;
+	}
 
-	// public Set<Champ> enemies(Champ champ) {
-	// 	return team0.getPicks().contains(champ) ? team1.getPicks() : team0.getPicks();
-	// }
+	public Set<Champ> enemies(Champ champ) {
+		Set<Champ> out = new HashSet<Champ>(); //just make list
+		out.addAll(team0.getPicks().contains(champ) ? team1.getPicks() : team0.getPicks());
+		return out;
+	}
 
-	// public boolean champWon(Champ champ) {
-	// 	return winner ^ team0.getPicks().contains(champ);
-	// }
+	public boolean champWon(Champ champ) {
+		return winner ^ team0.getPicks().contains(champ);
+	}
 
 	// public Set<Champ> allBans() {
 	// 	Set<Champ> out = new HashSet<Champ>();
@@ -81,11 +81,19 @@ public class Game {
 	// 	return id;
 	// }
 
-	// public String toString() {
-	// 	return team0 + " vs " + team1;
-	// }
+	public String toString() {
+		return team0 + " vs " + team1;
+	}
 
 	// public long getDateDiff(long date) {
 	// 	return date - this.date;
 	// }
+
+	public Team getTeam0() {
+		return team0;
+	}
+
+	public Team getTeam1() {
+		return team1;
+	}
 }

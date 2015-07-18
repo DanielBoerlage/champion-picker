@@ -2,6 +2,7 @@ package championpicker.champ;
 
 import championpicker.learn.Weights;
 import championpicker.game.GameSet;
+import championpicker.game.Context;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -66,14 +67,14 @@ public class ChampSet extends ArrayList<Champ> {
             champ.compileStats(games);
     }
 
-    public void compilePartialScore(Weights weights) {
+    public void compilePartialScores(Weights weights) {
         for(Champ champ : this)
             champ.compilePartialScore(weights);
     }
 
-    public void compileScore(Weights weights) {
+    public void compileScores(Weights weights, Context context) {
         for(Champ champ : this)
-            champ.compileScore(weights);
+            champ.compileScore(weights, context);
     }
 
     // public Iterator<Champ> iterator() {

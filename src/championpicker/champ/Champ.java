@@ -6,6 +6,7 @@ import championpicker.uncertainty.Tally;
 
 import championpicker.game.Game;
 import championpicker.game.GameSet;
+import championpicker.game.Context;
 import championpicker.learn.Weights;
 
 
@@ -69,7 +70,7 @@ public class Champ implements Comparable {
         //compiledSum += winRate
     }
 
-    public void compileScore(Weights weights) { //, Context context
+    public void compileScore(Weights weights, Context context) {
         score = partialScore;
     }
 

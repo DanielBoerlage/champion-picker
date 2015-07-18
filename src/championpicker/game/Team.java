@@ -2,16 +2,18 @@ package championpicker.game;
 
 import championpicker.champ.Champ;
 
-import java.util.Set;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Team {
 
-    private Set<Champ> picks, bans;
+    boolean firstPick;
+    private List<Champ> picks, bans;
 
-    public Team() {
-        picks = new HashSet<Champ>();
-        bans = new HashSet<Champ>();
+    public Team(boolean firstPick) {
+        this.firstPick = firstPick;
+        picks = new ArrayList<Champ>();
+        bans = new ArrayList<Champ>();
     }
 
     public void addPick(Champ champ) {
@@ -22,11 +24,19 @@ public class Team {
         bans.add(champ);
     }
 
-    public Set<Champ> getPicks() {
+    public List<Champ> getPicks() {
         return picks;
     }
 
-    public Set<Champ> getBans() {
+    public List<Champ> getBans() {
         return bans;
+    }
+
+    public boolean isFirstPick() {
+        return firstPick;
+    }
+
+    public String toString() {
+        return "picks: " + picks + "  bans: " + bans;
     }
 }
